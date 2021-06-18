@@ -8,9 +8,9 @@ import './index.scss';
 
 ReactDOM.render((
   <StrictMode>
-      <Router>
-        <App/>
-      </Router>
+    <Router>
+      <App/>
+    </Router>
   </StrictMode>
 ), document.querySelector(`#root`));
 
