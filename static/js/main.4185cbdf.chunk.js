@@ -1,0 +1,2 @@
+(this.webpackJsonpakimutin_avtomoto=this.webpackJsonpakimutin_avtomoto||[]).push([[0],{17:function(t,o,e){},23:function(t,o,e){"use strict";e.r(o);var n=e(0),c=e(9),i=e.n(c),r=e(11),s=e(2),u=function(){return Object(s.jsx)("h1",{children:"Avto-Moto"})};e(17);i.a.render(Object(s.jsx)(n.StrictMode,{children:Object(s.jsx)(r.a,{children:Object(s.jsx)(u,{})})}),document.querySelector("#root"))}},[[23,1,2]]]);
+//# sourceMappingURL=main.4185cbdf.chunk.js.map
