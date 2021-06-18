@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/akimutin_avtomoto/static/css/main.afd7172b.chunk.css",
-    "main.js": "/akimutin_avtomoto/static/js/main.4185cbdf.chunk.js",
-    "main.js.map": "/akimutin_avtomoto/static/js/main.4185cbdf.chunk.js.map",
+    "main.js": "/akimutin_avtomoto/static/js/main.bf387a3e.chunk.js",
+    "main.js.map": "/akimutin_avtomoto/static/js/main.bf387a3e.chunk.js.map",
     "runtime-main.js": "/akimutin_avtomoto/static/js/runtime-main.97e72a2e.js",
     "runtime-main.js.map": "/akimutin_avtomoto/static/js/runtime-main.97e72a2e.js.map",
     "static/css/2.3c526f5d.chunk.css": "/akimutin_avtomoto/static/css/2.3c526f5d.chunk.css",
-    "static/js/2.64343c99.chunk.js": "/akimutin_avtomoto/static/js/2.64343c99.chunk.js",
-    "static/js/2.64343c99.chunk.js.map": "/akimutin_avtomoto/static/js/2.64343c99.chunk.js.map",
+    "static/js/2.e671c363.chunk.js": "/akimutin_avtomoto/static/js/2.e671c363.chunk.js",
+    "static/js/2.e671c363.chunk.js.map": "/akimutin_avtomoto/static/js/2.e671c363.chunk.js.map",
     "index.html": "/akimutin_avtomoto/index.html",
     "static/css/2.3c526f5d.chunk.css.map": "/akimutin_avtomoto/static/css/2.3c526f5d.chunk.css.map",
     "static/css/main.afd7172b.chunk.css.map": "/akimutin_avtomoto/static/css/main.afd7172b.chunk.css.map",
-    "static/js/2.64343c99.chunk.js.LICENSE.txt": "/akimutin_avtomoto/static/js/2.64343c99.chunk.js.LICENSE.txt"
+    "static/js/2.e671c363.chunk.js.LICENSE.txt": "/akimutin_avtomoto/static/js/2.e671c363.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.97e72a2e.js",
     "static/css/2.3c526f5d.chunk.css",
-    "static/js/2.64343c99.chunk.js",
+    "static/js/2.e671c363.chunk.js",
     "static/css/main.afd7172b.chunk.css",
-    "static/js/main.4185cbdf.chunk.js"
+    "static/js/main.bf387a3e.chunk.js"
   ]
 }
