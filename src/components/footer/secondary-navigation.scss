@@ -1,10 +1,13 @@
 .secondary-navigation {
   list-style: none;
   margin: 0;
+  margin-left: -33px;
   padding: 0;
   display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
 }
 
-.secondary-navigation__item a {
-  text-decoration: none;
+.secondary-navigation__item {
+  margin-left: 33px;
 }

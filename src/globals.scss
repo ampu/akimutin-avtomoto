@@ -36,7 +36,34 @@
 }
 
 .page-title {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 41px;
+
+  color: $primary-text-color;
 }
 
 .page-link {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+
+  color: $primary-text-color;
+
+  &:hover {
+    text-decoration: underline;
+
+    &.active {
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+
+  &:active,
+  &.active {
+    color: $interactive-alternate-color;
+  }
 }

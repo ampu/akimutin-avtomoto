@@ -1,7 +1,15 @@
 .footer {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
   background-color: $secondary-background-color;
 }
 
 .footer__container {
   @include container();
+}
+
+.footer__secondary-navigation {
+  margin-left: 8px;
+  margin-right: 2px;
 }

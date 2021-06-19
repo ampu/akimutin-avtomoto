@@ -9,16 +9,16 @@ const PrimaryNavigation = ({className}) => {
   return (
     <ul className={getClassName(`primary-navigation`, className)}>
       <li className="primary-navigation__item">
-        <NavLink exact to={RoutePath.PRODUCTS}>Автомобили</NavLink>
+        <NavLink className="page-link" exact to={RoutePath.PRODUCTS}>Автомобили</NavLink>
       </li>
       <li className="primary-navigation__item">
-        <NavLink exact to={RoutePath.CONTACTS}>Контакты</NavLink>
+        <NavLink className="page-link" exact to={RoutePath.CONTACTS}>Контакты</NavLink>
       </li>
       <li className="primary-navigation__item">
-        <NavLink exact to={RoutePath.SERVICES}>Услуги</NavLink>
+        <NavLink className="page-link" exact to={RoutePath.SERVICES}>Услуги</NavLink>
       </li>
       <li className="primary-navigation__item">
-        <NavLink exact to={RoutePath.VACANCIES}>Вакансии</NavLink>
+        <NavLink className="page-link" exact to={RoutePath.VACANCIES}>Вакансии</NavLink>
       </li>
     </ul>
   );
