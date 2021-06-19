@@ -1,0 +1,35 @@
+.primary-navigation {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.primary-navigation__item {
+  margin-left: 68px;
+}
+
+.primary-navigation__item a {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+
+  color: $primary-text-color;
+
+  &:hover {
+    text-decoration: underline;
+
+    &.active {
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+
+  &:active,
+  &.active {
+    color: $interactive-alternate-color;
+  }
+}

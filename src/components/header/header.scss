@@ -1,0 +1,23 @@
+.header {
+  padding-top: 15px;
+  padding-bottom: 14px;
+
+  background-color: $secondary-background-color;
+}
+
+.header__navigation {
+  @include container();
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  margin-left: 4px;
+}
+
+.header__primary-navigation {
+  margin-right: 4px;
+}

@@ -5,10 +5,12 @@ import {PrimaryNavigation} from './primary-navigation';
 
 const Header = () => {
   return (
-    <nav>
-      <Logo/>
-      <PrimaryNavigation/>
-    </nav>
+    <header className="header">
+      <nav className="header__navigation">
+        <Logo className="header__logo"/>
+        <PrimaryNavigation className="header__primary-navigation"/>
+      </nav>
+    </header>
   );
 };
 

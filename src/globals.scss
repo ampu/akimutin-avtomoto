@@ -1,0 +1,42 @@
+.container {
+  @include container();
+}
+
+.page {
+  height: 100%;
+}
+
+.page-body {
+  height: 100%;
+
+  font-family: "opensans", "tahoma", sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  font-weight: 400;
+
+  color: $primary-text-color;
+  background-color: $primary-background-color;
+}
+
+.page-layout {
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+}
+
+.page-main {
+  &--not-found {
+    @include container();
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.page-title {
+}
+
+.page-link {
+}

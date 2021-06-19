@@ -1,0 +1,7 @@
+.footer {
+  background-color: $secondary-background-color;
+}
+
+.footer__container {
+  @include container();
+}

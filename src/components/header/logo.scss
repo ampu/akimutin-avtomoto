@@ -1,0 +1,12 @@
+.logo {
+  display: flex;
+
+  &.active {
+    cursor: default;
+  }
+}
+
+.logo__image {
+  width: 134px;
+  height: 55px;
+}
