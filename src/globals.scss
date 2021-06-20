@@ -25,7 +25,13 @@
 }
 
 .page-main {
-  &--not-found {
+  width: 100%;
+
+  &--product-page {
+    @include container();
+  }
+
+  &--not-found-page {
     @include container();
 
     display: flex;
