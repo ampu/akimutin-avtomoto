@@ -31,15 +31,13 @@ const ProductSlider = ({product}) => {
   });
 
   const previousArrowClassName = getClassName({
-    [`product-slider__arrow`]: true,
-    [`product-slider__arrow--previous`]: true,
-    [`product-slider__arrow--disabled`]: activeImageIndex === 0,
+    [`product-slider__arrow-button`]: true,
+    [`product-slider__arrow-button--previous`]: true,
   });
 
   const nextArrowPathClassName = getClassName({
-    [`product-slider__arrow`]: true,
-    [`product-slider__arrow--next`]: true,
-    [`product-slider__arrow--disabled`]: activeImageIndex === lastImageIndex,
+    [`product-slider__arrow-button`]: true,
+    [`product-slider__arrow-button--next`]: true,
   });
 
   return (
@@ -85,6 +83,7 @@ const ProductSlider = ({product}) => {
                 aria-label={`Выбрать изображение ${product.title} №${thumbnailIndex + 1}`}
                 onClick={onThumbnailButtonClick}
                 data-thumbnail-index={thumbnailIndex}
+                disabled={activeImageIndex === thumbnailIndex}
               >
                 <img
                   className="product-slider__thumbnail-image"
