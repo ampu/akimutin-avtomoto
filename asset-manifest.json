@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/akimutin_avtomoto/static/css/main.c6546165.chunk.css",
-    "main.js": "/akimutin_avtomoto/static/js/main.61998807.chunk.js",
-    "main.js.map": "/akimutin_avtomoto/static/js/main.61998807.chunk.js.map",
+    "main.css": "/akimutin_avtomoto/static/css/main.59769c4b.chunk.css",
+    "main.js": "/akimutin_avtomoto/static/js/main.728eb035.chunk.js",
+    "main.js.map": "/akimutin_avtomoto/static/js/main.728eb035.chunk.js.map",
     "runtime-main.js": "/akimutin_avtomoto/static/js/runtime-main.97e72a2e.js",
     "runtime-main.js.map": "/akimutin_avtomoto/static/js/runtime-main.97e72a2e.js.map",
     "static/css/2.3c526f5d.chunk.css": "/akimutin_avtomoto/static/css/2.3c526f5d.chunk.css",
-    "static/js/2.ce0e6217.chunk.js": "/akimutin_avtomoto/static/js/2.ce0e6217.chunk.js",
-    "static/js/2.ce0e6217.chunk.js.map": "/akimutin_avtomoto/static/js/2.ce0e6217.chunk.js.map",
+    "static/js/2.627d14df.chunk.js": "/akimutin_avtomoto/static/js/2.627d14df.chunk.js",
+    "static/js/2.627d14df.chunk.js.map": "/akimutin_avtomoto/static/js/2.627d14df.chunk.js.map",
     "index.html": "/akimutin_avtomoto/index.html",
     "static/css/2.3c526f5d.chunk.css.map": "/akimutin_avtomoto/static/css/2.3c526f5d.chunk.css.map",
-    "static/css/main.c6546165.chunk.css.map": "/akimutin_avtomoto/static/css/main.c6546165.chunk.css.map",
-    "static/js/2.ce0e6217.chunk.js.LICENSE.txt": "/akimutin_avtomoto/static/js/2.ce0e6217.chunk.js.LICENSE.txt",
+    "static/css/main.59769c4b.chunk.css.map": "/akimutin_avtomoto/static/css/main.59769c4b.chunk.css.map",
+    "static/js/2.627d14df.chunk.js.LICENSE.txt": "/akimutin_avtomoto/static/js/2.627d14df.chunk.js.LICENSE.txt",
     "static/media/logo.28d1aa68.svg": "/akimutin_avtomoto/static/media/logo.28d1aa68.svg",
     "static/media/index.scss": "/akimutin_avtomoto/static/media/product-page-product-features-desktop.5c8541f5.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.97e72a2e.js",
     "static/css/2.3c526f5d.chunk.css",
-    "static/js/2.ce0e6217.chunk.js",
-    "static/css/main.c6546165.chunk.css",
-    "static/js/main.61998807.chunk.js"
+    "static/js/2.627d14df.chunk.js",
+    "static/css/main.59769c4b.chunk.css",
+    "static/js/main.728eb035.chunk.js"
   ]
 }
