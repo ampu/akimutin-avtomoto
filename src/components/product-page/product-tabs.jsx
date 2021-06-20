@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ProductTabFeatures} from './product-tab-features';
+import {ProductTabSpecifications} from './product-tab-specifications';
 import {ProductTabContacts} from './product-tab-contacts';
 import {ProductTabReviews} from './product-tab-reviews';
 
@@ -13,7 +13,7 @@ const ProductTabs = () => {
     </ul>
     <ul>
       <li>
-        <ProductTabFeatures/>
+        <ProductTabSpecifications/>
       </li>
       <li>
         <ProductTabReviews/>

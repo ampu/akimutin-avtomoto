@@ -13,4 +13,7 @@ export const RoutePath = {
   SELLING_CAR: `/selling-car`,
   TRADE_IN: `/trade-in`,
   TEST_DRIVE: `/test-drive`,
+
+  BUY_CAR: `/test-drive`,
+  LOAN_CAR: `/test-drive`,
 };
