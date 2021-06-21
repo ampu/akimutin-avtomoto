@@ -1,0 +1,47 @@
+.product-tabs {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-flow: column;
+  padding-left: 6px;
+}
+
+.product-tabs__controls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 30px;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.product-tabs__control {
+  box-sizing: border-box;
+  width: 195px;
+  padding: 14px 14px;
+  display: flex;
+  justify-content: center;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  text-decoration: none;
+
+  color: $primary-text-color;
+  border: 1px solid $border-color;
+
+  &:hover {
+    color: $interactive-color;
+    background-color: $interactive-alternate-color;
+    border-color: $interactive-alternate-color;
+    opacity: 0.8;
+  }
+
+  &.active {
+    cursor: default;
+    opacity: 1;
+    color: $interactive-color;
+    background-color: $interactive-alternate-color;
+    border-color: $interactive-alternate-color;
+  }
+}

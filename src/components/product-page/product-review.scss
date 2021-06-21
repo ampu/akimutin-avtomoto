@@ -1,0 +1,144 @@
+.product-review {
+  margin-bottom: 21px;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.product-review__author {
+  width: 100%;
+  margin-bottom: 12px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+
+  color: $primary-text-color;
+}
+
+.product-review__text-container {
+  margin: 0;
+  padding: 0;
+  margin-bottom: (20px - 13px);
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.product-review__text-key {
+  position: relative;
+  margin-bottom: 3px;
+  display: flex;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: $alternative-text-color;
+
+  &--advantages {
+    padding-left: 19px;
+
+    &::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+
+      color: $reviews-decoration-color;
+    }
+  }
+
+  &--disadvantages {
+    padding-left: 19px;
+
+    &::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+
+      color: $reviews-decoration-color;
+    }
+  }
+}
+
+.product-review__text-value {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 13px;
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: $alternative-text-color;
+
+  &--advantages {
+    padding-left: 19px;
+  }
+
+  &--disadvantages {
+    padding-left: 19px;
+  }
+}
+
+.product-review__rating {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+
+  &--recommended {
+    &::after {
+      content: "Рекомендует";
+      margin-left: 20px;
+      display: flex;
+
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 20px;
+
+      color: $interactive-alternate-color;
+    }
+  }
+}
+
+.product-review__created-at {
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+
+  opacity: 0.4;
+  color: $alternative-text-color;
+}
+
+.product-review__response {
+  margin-left: 26px;
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+
+  color: $interactive-alternate-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+}

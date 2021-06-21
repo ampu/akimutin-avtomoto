@@ -2,8 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import getClassName from 'classnames';
 
-import {RoutePath} from '../../constants/route-path';
+import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
+import {formatMoney} from '../../helpers/product-helpers';
 
 const ProductInformation = ({product}) => {
   return (
@@ -14,7 +15,7 @@ const ProductInformation = ({product}) => {
         {product.features.map((feature) => {
           const className = getClassName({
             [`product-information__features-item`]: true,
-            [`product-information__features-item--{feature.key}`]: true,
+            [`product-information__features-item--${feature.key}`]: true,
           });
           return (
             <li key={feature.key} className={className}>{feature.value}</li>
@@ -23,16 +24,16 @@ const ProductInformation = ({product}) => {
       </ul>
 
       <p className="product-information__prices">
-        <span className="product-information__price">{product.price}</span>
-        <span className="product-information__old-price">{product.oldPrice}</span>
+        <span className="product-information__price">{formatMoney(product.price)}&nbsp;₽</span>
+        <span className="product-information__old-price">{formatMoney(product.oldPrice)}&nbsp;₽</span>
       </p>
 
-      <Link className="product-information__buy-car-button" to={RoutePath.BUY_CAR}>
+      <Link className="product-information__buy-car-button" to={LocalPath.BUY_CAR}>
         Оставить заявку
       </Link>
 
-      <Link className="product-information__loan-car-button" to={RoutePath.LOAN_CAR}>
-        В кредит от {product.creditPrice}
+      <Link className="product-information__loan-car-button" to={LocalPath.LOAN_CAR}>
+        В кредит от {formatMoney(product.creditPrice)}&nbsp;₽
       </Link>
     </section>
   );

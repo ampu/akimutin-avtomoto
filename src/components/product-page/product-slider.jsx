@@ -9,15 +9,15 @@ const ProductSlider = ({product}) => {
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const onPreviousArrowClick = () => {
-    setActiveImageIndex((previousActiveImageIndex) => (
-      clamp(previousActiveImageIndex - 1, 0, lastImageIndex)
+  const onBackArrowClick = () => {
+    setActiveImageIndex((backActiveImageIndex) => (
+      clamp(backActiveImageIndex - 1, 0, lastImageIndex)
     ));
   };
 
   const onNextArrowClick = () => {
-    setActiveImageIndex((previousActiveImageIndex) => (
-      clamp(previousActiveImageIndex + 1, 0, lastImageIndex)
+    setActiveImageIndex((backActiveImageIndex) => (
+      clamp(backActiveImageIndex + 1, 0, lastImageIndex)
     ));
   };
 
@@ -30,9 +30,9 @@ const ProductSlider = ({product}) => {
     [`product-slider__active-image-container--new-model`]: true,
   });
 
-  const previousArrowClassName = getClassName({
+  const backArrowClassName = getClassName({
     [`product-slider__arrow-button`]: true,
-    [`product-slider__arrow-button--previous`]: true,
+    [`product-slider__arrow-button--back`]: true,
   });
 
   const nextArrowPathClassName = getClassName({
@@ -43,19 +43,21 @@ const ProductSlider = ({product}) => {
   return (
     <div className="product-slider">
       <figure className={activeImageContainerClassName}>
-        <img
-          className="product-slider__active-image"
-          src={product.images[activeImageIndex]}
-          alt={`Изображение ${product.title}`}
-          width="600" height="375"
-        />
+        <a className="product-slider__active-image-link" href={product.images[activeImageIndex]}>
+          <img
+            className="product-slider__active-image"
+            src={product.images[activeImageIndex]}
+            alt={`Изображение ${product.title}`}
+            width="600" height="375"
+          />
+        </a>
       </figure>
 
       <div className="product-slider__controls">
         <button type="button"
-          className={previousArrowClassName}
+          className={backArrowClassName}
           aria-label={`Выбрать предыдущее изображение ${product.title}`}
-          onClick={onPreviousArrowClick}
+          onClick={onBackArrowClick}
           disabled={activeImageIndex === 0}
         >
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,25 +77,30 @@ const ProductSlider = ({product}) => {
         </button>
 
         <ul className="product-slider__thumbnails">
-          {product.thumbnails.map((thumbnail, thumbnailIndex) => (
-            <li key={thumbnail} className="product-slider__thumbnails-item">
-              <button
-                type="button"
-                className="product-slider__thumbnail-button"
-                aria-label={`Выбрать изображение ${product.title} №${thumbnailIndex + 1}`}
-                onClick={onThumbnailButtonClick}
-                data-thumbnail-index={thumbnailIndex}
-                disabled={activeImageIndex === thumbnailIndex}
-              >
-                <img
-                  className="product-slider__thumbnail-image"
-                  src={thumbnail}
-                  alt={`Превью ${product.title} №${thumbnailIndex + 1}`}
-                  width="128" height="80"
-                />
-              </button>
-            </li>
-          ))}
+          {product.thumbnails.map((thumbnail, thumbnailIndex) => {
+            const buttonClassName = getClassName({
+              [`product-slider__thumbnail-button`]: true,
+              [`active`]: activeImageIndex === thumbnailIndex,
+            });
+            return (
+              <li key={thumbnail} className="product-slider__thumbnails-item">
+                <button
+                  type="button"
+                  className={buttonClassName}
+                  aria-label={`Выбрать изображение ${product.title} №${thumbnailIndex + 1}`}
+                  onClick={onThumbnailButtonClick}
+                  data-thumbnail-index={thumbnailIndex}
+                >
+                  <img
+                    className="product-slider__thumbnail-image"
+                    src={thumbnail}
+                    alt={`Превью ${product.title} №${thumbnailIndex + 1}`}
+                    width="128" height="80"
+                  />
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

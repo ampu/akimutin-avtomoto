@@ -1,0 +1,36 @@
+.product-tab-contacts {
+  display: grid;
+  grid-template-columns: 274px 1fr;
+  grid-column-gap: 74px;
+}
+
+.product-tab-contacts__list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+}
+
+.product-tab-contacts__list-item-key {
+  margin-bottom: 10px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.product-tab-contacts__list-item-value {
+  margin: 0;
+  margin-bottom: 27px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.product-tab-contacts__map img {
+  width: 431px;
+  height: 271px;
+}

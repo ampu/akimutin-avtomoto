@@ -1,6 +1,7 @@
-$container-side-padding-desktop: 60px;
+$container-side-padding-desktop: 30px;
 
 $primary-text-color: #48494d;
+$alternative-text-color: #000000;
 $primary-background-color: #ffffff;
 
 $secondary-text-color: #000000;
@@ -10,8 +11,10 @@ $interactive-color: #ffffff;
 $interactive-alternate-color: #d12136;
 $interactive-hover-color: #bd0c21;
 
-$slider-arrow-default-color: #d7d9df;
-
-$contacts-text-color: #1a212f;
-
+$border-color: #d7d9df;
 $disabled-color: #bdbec2;
+
+$reviews-border-color: rgba(#000000, 0.2);
+$reviews-overlay-color: rgba(#000000, 0.2);
+$reviews-decoration-color: #ff0000;
+$contacts-text-color: #1a212f;

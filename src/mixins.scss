@@ -1,6 +1,7 @@
 @mixin container() {
+  box-sizing: border-box;
   min-width: 1024px;
-  max-width: 1176px;
+  max-width: 1176px + 2 * $container-side-padding-desktop;
   margin: 0 auto;
   padding-left: $container-side-padding-desktop;
   padding-right: $container-side-padding-desktop;

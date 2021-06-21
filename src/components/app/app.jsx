@@ -4,12 +4,12 @@ import {Route, Switch} from 'react-router-dom';
 import {ProductPage} from '../product-page/product-page';
 import {NotFoundPage} from '../not-found-page/not-found-page';
 
-import {RoutePath} from '../../constants/route-path';
+import {PRODUCT_PATHS} from '../../constants/local-path';
 
 const App = () => {
   return (
     <Switch>
-      <Route exact path={RoutePath.INDEX}>
+      <Route exact path={PRODUCT_PATHS}>
         <ProductPage/>
       </Route>
       <Route>

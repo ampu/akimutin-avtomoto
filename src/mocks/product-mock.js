@@ -1,4 +1,5 @@
 export const PRODUCT_MOCK = {
+  id: `1`,
   isNewModel: true,
   title: `Марпех 11`,
   price: 2300000,

@@ -10,7 +10,8 @@ const specificationShape = PropTypes.shape({
   value: PropTypes.string.isRequired,
 });
 
-export const productShape = PropTypes.shape({
+const productType = {
+  id: PropTypes.string.isRequired,
   isNewModel: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -20,4 +21,11 @@ export const productShape = PropTypes.shape({
   images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   features: PropTypes.arrayOf(featureShape.isRequired).isRequired,
   specifications: PropTypes.arrayOf(specificationShape.isRequired).isRequired,
-});
+};
+
+const productShape = PropTypes.shape(productType);
+
+export {
+  productType,
+  productShape,
+};

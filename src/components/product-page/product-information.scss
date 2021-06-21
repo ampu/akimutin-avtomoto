@@ -1,3 +1,172 @@
 .product-information {
-  padding-top: 72px;
+  padding-top: 74px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+
+.product-information__title {
+  margin-bottom: 19px;
+}
+
+.product-information__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  margin-right: -14px;
+  margin-bottom: 37px;
+}
+
+.product-information__features-item {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-right: 14px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+
+  opacity: 0.5;
+
+  &--engine-type-gasoline {
+    &::before {
+      content: "";
+      display: table;
+      width: 44px;
+      height: 40px;
+
+      background: transparent url("../../images/engine-type-gasoline-icon.svg") no-repeat center center / 24px 22px;
+    }
+  }
+
+  &--transmission-manual {
+    &::before {
+      content: "";
+      display: table;
+      width: 40px;
+      height: 40px;
+
+      background: transparent url("../../images/transmission-manual-icon.svg") no-repeat center center / 40px 40px;
+    }
+  }
+
+  &--horsepower {
+    &::before {
+      content: "";
+      display: table;
+      width: 66px;
+      height: 40px;
+
+      background: transparent url("../../images/horsepower-icon.svg") no-repeat center center / 32px 21px;
+    }
+  }
+
+  &--engine-capacity {
+    &::before {
+      content: "";
+      display: table;
+      width: 53px;
+      height: 40px;
+
+      background: transparent url("../../images/engine-capacity-icon.svg") no-repeat center center / 30px 23px;
+    }
+  }
+}
+
+.product-information__prices {
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  margin-bottom: 37px;
+}
+
+.product-information__price {
+  display: flex;
+  margin-right: 30px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 48px;
+}
+
+.product-information__old-price {
+  position: relative;
+  display: flex;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+
+  opacity: 0.5;
+
+  &::before {
+    content: "";
+    display: table;
+    position: absolute;
+    left: -3px;
+    top: -2px;
+    z-index: 1;
+    width: calc(100% + 12px);
+    height: calc(100% + 2px);
+
+    background: transparent url("data:image/svg+xml,%3Csvg width='125' height='13' viewBox='0 0 125 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 12.5L124 1' stroke='%2348494d'/%3E%3C/svg%3E") center center / 100% 100%;
+  }
+}
+
+.product-information__buy-car-button {
+  display: flex;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  color: $interactive-color;
+  background-color: $interactive-alternate-color;
+
+  &:hover {
+    background-color: $interactive-hover-color;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.product-information__loan-car-button {
+  display: flex;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  color: $interactive-alternate-color;
+  background-color: $interactive-color;
+  border: 1px solid $interactive-alternate-color;
+
+  &:hover {
+    color: $interactive-color;
+    background-color: $interactive-alternate-color;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
 }

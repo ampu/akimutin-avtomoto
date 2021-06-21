@@ -1,0 +1,47 @@
+.product-tab-reviews {
+  position: relative;
+}
+
+.product-tab-reviews__write-review-link {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 16px 20px;
+  display: flex;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  color: $interactive-alternate-color;
+  background-color: transparent;
+  border: 1px solid $interactive-alternate-color;
+
+  &:hover {
+    color: $interactive-color;
+    background-color: $interactive-alternate-color;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.product-tab-reviews__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+}
+
+.product-tab-reviews__list-item {
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid $reviews-border-color;
+}
