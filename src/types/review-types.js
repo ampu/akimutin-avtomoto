@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 const reviewShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  isRecommended: PropTypes.bool.isRequired,
+  productId: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,
   advantages: PropTypes.string.isRequired,

@@ -6,7 +6,8 @@
 }
 
 .product-information__title {
-  margin-bottom: 19px;
+  margin-bottom: 21px;
+  margin-left: 3px;
 }
 
 .product-information__features {
@@ -15,15 +16,16 @@
   padding: 0;
   display: flex;
   align-items: flex-start;
-  margin-right: -14px;
-  margin-bottom: 37px;
+  margin-left: 10px;
+  margin-right: -12px;
+  margin-bottom: 22px;
 }
 
 .product-information__features-item {
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin-right: 14px;
+  margin-right: 12px;
 
   font-style: normal;
   font-weight: 400;
@@ -58,7 +60,7 @@
     &::before {
       content: "";
       display: table;
-      width: 66px;
+      width: 62px;
       height: 40px;
 
       background: transparent url("../../images/horsepower-icon.svg") no-repeat center center / 32px 21px;
@@ -69,7 +71,7 @@
     &::before {
       content: "";
       display: table;
-      width: 53px;
+      width: 68px;
       height: 40px;
 
       background: transparent url("../../images/engine-capacity-icon.svg") no-repeat center center / 30px 23px;
@@ -82,16 +84,18 @@
   flex-flow: wrap;
   align-items: center;
   margin-bottom: 37px;
+  margin-left: 3px;
 }
 
 .product-information__price {
   display: flex;
-  margin-right: 30px;
+  margin-right: 36px;
 
   font-style: normal;
   font-weight: 700;
   font-size: 35px;
   line-height: 48px;
+  white-space: pre;
 }
 
 .product-information__old-price {
@@ -102,6 +106,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 27px;
+  white-space: pre;
 
   opacity: 0.5;
 
@@ -109,9 +114,9 @@
     content: "";
     display: table;
     position: absolute;
+    z-index: 1;
     left: -3px;
     top: -2px;
-    z-index: 1;
     width: calc(100% + 12px);
     height: calc(100% + 2px);
 
@@ -121,7 +126,7 @@
 
 .product-information__buy-car-button {
   display: flex;
-  padding: 16px 20px;
+  padding: 16px 19px;
   margin-bottom: 16px;
 
   font-style: normal;
@@ -146,7 +151,7 @@
 
 .product-information__loan-car-button {
   display: flex;
-  padding: 16px 20px;
+  padding: 16px 19px;
   margin-bottom: 16px;
 
   font-style: normal;

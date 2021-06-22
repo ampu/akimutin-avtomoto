@@ -1,12 +1,12 @@
 .product-review {
-  margin-bottom: 21px;
+  margin-bottom: 19px;
   display: flex;
   flex-flow: wrap;
 }
 
 .product-review__author {
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 
   font-style: normal;
   font-weight: 600;
@@ -43,6 +43,7 @@
     &::before {
       content: "+";
       position: absolute;
+      z-index: 1;
       left: 0;
 
       color: $reviews-decoration-color;
@@ -55,6 +56,7 @@
     &::before {
       content: "–";
       position: absolute;
+      z-index: 1;
       left: 0;
 
       color: $reviews-decoration-color;
@@ -65,7 +67,7 @@
 .product-review__text-value {
   margin: 0;
   padding: 0;
-  margin-bottom: 13px;
+  margin-bottom: 15px;
   display: flex;
 
   font-style: normal;
@@ -85,27 +87,73 @@
 }
 
 .product-review__rating {
+  position: relative;
   display: flex;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 26px;
+  padding-left: (103px + 20px);
 
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 20px;
 
-  &--recommended {
+  color: $interactive-alternate-color;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 103px;
+    height: 17px;
+
+    background: transparent url("../../images/rating.svg") no-repeat left center / 103px 17px;
+  }
+
+  &--stars-1,
+  &--stars-2,
+  &--stars-3,
+  &--stars-4,
+  &--stars-5 {
     &::after {
-      content: "Рекомендует";
-      margin-left: 20px;
-      display: flex;
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      height: 17px;
 
-      font-style: normal;
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 20px;
+      background: transparent url("../../images/rating-active.svg") no-repeat left center / 103px 17px;
+    }
+  }
 
-      color: $interactive-alternate-color;
+  &--stars-1 {
+    &::after {
+      width: (103px * 1 / 5);
+    }
+  }
+
+  &--stars-2 {
+    &::after {
+      width: (103px * 2 / 5);
+    }
+  }
+
+  &--stars-3 {
+    &::after {
+      width: (103px * 3 / 5);
+    }
+  }
+
+  &--stars-4 {
+    &::after {
+      width: (103px * 4 / 5);
+    }
+  }
+
+  &--stars-5 {
+    &::after {
+      width: (103px * 5 / 5);
     }
   }
 }
@@ -123,7 +171,7 @@
 }
 
 .product-review__response {
-  margin-left: 26px;
+  margin-left: 27px;
   display: flex;
 
   font-style: normal;

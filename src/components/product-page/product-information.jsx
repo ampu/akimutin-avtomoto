@@ -4,7 +4,7 @@ import getClassName from 'classnames';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
-import {formatMoney} from '../../helpers/product-helpers';
+import {addSpecialMillionSeparator, formatMoney} from '../../helpers/product-helpers';
 
 const ProductInformation = ({product}) => {
   return (
@@ -25,7 +25,7 @@ const ProductInformation = ({product}) => {
 
       <p className="product-information__prices">
         <span className="product-information__price">{formatMoney(product.price)}&nbsp;₽</span>
-        <span className="product-information__old-price">{formatMoney(product.oldPrice)}&nbsp;₽</span>
+        <span className="product-information__old-price">{addSpecialMillionSeparator(formatMoney(product.oldPrice))}&nbsp;₽</span>
       </p>
 
       <Link className="product-information__buy-car-button" to={LocalPath.BUY_CAR}>

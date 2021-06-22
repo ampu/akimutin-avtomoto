@@ -7,7 +7,7 @@ export const REVIEW_MOCKS = [
     id: `1`,
     productId: `1`,
     isRecommended: true,
-    rating: 3,
+    rating: 5,
     author: `Борис Иванов`,
     advantages: `мощность, внешний вид`,
     disadvantages: `Слабые тормозные колодки (пришлось заменить)`,

@@ -5,16 +5,17 @@ import getClassName from 'classnames';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
-import {deserializeReview} from '../../helpers/review-helpers';
+import {deserializeLocalReview} from '../../helpers/review-helpers';
 
 const ErrorMessage = {
+  NONE: ``,
   REQUIRED: `Пожалуйста, заполните поле`,
 };
 
-const ProductReviewForm = ({product, onClose}) => {
+const ProductReviewForm = ({product, onClose, onSubmit}) => {
   const formRef = useRef(null);
-  const [authorError, setAuthorError] = useState(``);
-  const [commentError, setCommentError] = useState(``);
+  const [authorError, setAuthorError] = useState(ErrorMessage.NONE);
+  const [commentError, setCommentError] = useState(ErrorMessage.NONE);
 
   const onContainerClick = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -25,6 +26,14 @@ const ProductReviewForm = ({product, onClose}) => {
   const onCloseButtonClick = () => {
     onClose();
   };
+
+  useEffect(() => {
+    document.body.classList.add(`page-body--modal`);
+
+    return () => {
+      document.body.classList.remove(`page-body--modal`);
+    };
+  }, []);
 
   useEffect(() => {
     const onDocumentKeyDown = (evt) => {
@@ -43,24 +52,36 @@ const ProductReviewForm = ({product, onClose}) => {
     };
   }, [onClose]);
 
+  const onAuthorInputChange = (evt) => {
+    if (authorError === ErrorMessage.REQUIRED && evt.target.value) {
+      setAuthorError(ErrorMessage.NONE);
+    }
+  };
+
+  const onCommentInputChange = (evt) => {
+    if (commentError === ErrorMessage.REQUIRED && evt.target.value) {
+      setCommentError(ErrorMessage.NONE);
+    }
+  };
+
   const onFormSubmit = (evt) => {
     evt.preventDefault();
 
-    const review = deserializeReview(formRef.current);
+    const localReview = deserializeLocalReview(formRef.current);
     let isValid = true;
 
-    if (!review.author) {
+    if (!localReview.author) {
       isValid = false;
       setAuthorError(ErrorMessage.REQUIRED);
     }
 
-    if (!review.comment) {
+    if (!localReview.comment) {
       isValid = false;
       setCommentError(ErrorMessage.REQUIRED);
     }
 
     if (isValid) {
-      onClose();
+      onSubmit(localReview);
     }
   };
 
@@ -97,35 +118,49 @@ const ProductReviewForm = ({product, onClose}) => {
 
         <label className="product-review-form__author">
           {authorError && <span className="product-review-form__error-message">{authorError}</span>}
-          <input type="text" className={authorInputClassName} name="author" placeholder="Имя"/>
+          <input
+            type="text"
+            className={authorInputClassName}
+            name="author"
+            placeholder="Имя"
+            onChange={onAuthorInputChange}
+          />
         </label>
 
-        <fieldset className="product-review-form__rating">
-          <legend className="product-review-form__rating-legend">
-            Оцените товар:
-          </legend>
+        <div className="product-review-form__rating-container">
+          <fieldset className="product-review-form__rating">
+            <legend className="product-review-form__rating-legend">
+              Оцените товар:
+            </legend>
 
-          <label>
-            <input className="product-review-form__input--rating" type="checkbox" name="rating" value="1"/>
-            <span className="product-review-form__rating-icon"/>
-          </label>
-          <label>
-            <input className="product-review-form__rating-input" type="checkbox" name="rating" value="2"/>
-            <span className="product-review-form__rating-icon"/>
-          </label>
-          <label>
-            <input className="product-review-form__rating-input" type="checkbox" name="rating" value="3"/>
-            <span className="product-review-form__rating-icon"/>
-          </label>
-          <label>
-            <input className="product-review-form__rating-input" type="checkbox" name="rating" value="4"/>
-            <span className="product-review-form__rating-icon"/>
-          </label>
-          <label>
-            <input className="product-review-form__rating-input" type="checkbox" name="rating" value="5"/>
-            <span className="product-review-form__rating-icon"/>
-          </label>
-        </fieldset>
+            <input className="visually-hidden" type="radio" name="rating" value="0" defaultChecked disabled/>
+
+            <label htmlFor="product-review-form-rating-1">
+              <span className="visually-hidden">1 звезда</span>
+            </label>
+            <input id="product-review-form-rating-1" className="visually-hidden" type="radio" name="rating" value="1"/>
+
+            <label htmlFor="product-review-form-rating-2">
+              <span className="visually-hidden">2 звезды</span>
+            </label>
+            <input id="product-review-form-rating-2" className="visually-hidden" type="radio" name="rating" value="2"/>
+
+            <label htmlFor="product-review-form-rating-3">
+              <span className="visually-hidden">3 звезды</span>
+            </label>
+            <input id="product-review-form-rating-3" className="visually-hidden" type="radio" name="rating" value="3"/>
+
+            <label htmlFor="product-review-form-rating-4">
+              <span className="visually-hidden">4 звезды</span>
+            </label>
+            <input id="product-review-form-rating-4" className="visually-hidden" type="radio" name="rating" value="4"/>
+
+            <label htmlFor="product-review-form-rating-5">
+              <span className="visually-hidden">5 звёзд</span>
+            </label>
+            <input id="product-review-form-rating-5" className="visually-hidden" type="radio" name="rating" value="5"/>
+          </fieldset>
+        </div>
 
         <label className="product-review-form__advantages">
           <input type="text" className="product-review-form__input" name="advantages" placeholder="Достоинства"/>
@@ -141,6 +176,7 @@ const ProductReviewForm = ({product, onClose}) => {
             className={commentInputClassName}
             name="comment"
             placeholder="Комментарий"
+            onChange={onCommentInputChange}
           />
         </label>
 
@@ -155,6 +191,7 @@ const ProductReviewForm = ({product, onClose}) => {
 ProductReviewForm.propTypes = {
   product: productShape.isRequired,
   onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export {ProductReviewForm};

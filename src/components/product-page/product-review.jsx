@@ -1,15 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, generatePath} from 'react-router-dom';
 import getClassName from 'classnames';
 
-import {reviewShape} from '../../types/reviews-type';
-import {formatStars, humanizeAsDurationFromNow} from '../../helpers/review-helpers';
+import {reviewShape} from '../../types/review-types';
+import {humanizeAsDurationFromNow, humanizeRating} from '../../helpers/review-helpers';
 import {LocalPath} from '../../constants/local-path';
 
+const REVIEW_RERENDER_INTERVAL = 60 * 1000;
+
 const ProductReview = ({review}) => {
+  const [, setRenderRevision] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setRenderRevision((previousRenderRevision) => previousRenderRevision + 1);
+    }, REVIEW_RERENDER_INTERVAL);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   const ratingClassName = getClassName({
     [`product-review__rating`]: true,
-    [`product-review__rating--recommended`]: review.isRecommended,
+    [`product-review__rating--stars-1`]: review.rating === 1,
+    [`product-review__rating--stars-2`]: review.rating === 2,
+    [`product-review__rating--stars-3`]: review.rating === 3,
+    [`product-review__rating--stars-4`]: review.rating === 4,
+    [`product-review__rating--stars-5`]: review.rating === 5,
   });
 
   return (
@@ -17,21 +35,27 @@ const ProductReview = ({review}) => {
       <strong className="product-review__author">{review.author}</strong>
 
       <dl className="product-review__text-container">
-        <dt className="product-review__text-key product-review__text-key--advantages">Достоинства</dt>
-        <dd className="product-review__text-value product-review__text-value--advantages">{review.advantages}</dd>
+        {review.advantages && <>
+          <dt className="product-review__text-key product-review__text-key--advantages">Достоинства</dt>
+          <dd className="product-review__text-value product-review__text-value--advantages">{review.advantages}</dd>
+        </>}
 
-        <dt className="product-review__text-key product-review__text-key--disadvantages">Недостатки</dt>
-        <dd className="product-review__text-value product-review__text-value--disadvantages">{review.disadvantages}</dd>
+        {review.disadvantages && <>
+          <dt className="product-review__text-key product-review__text-key--disadvantages">Недостатки</dt>
+          <dd className="product-review__text-value product-review__text-value--disadvantages">{review.disadvantages}</dd>
+        </>}
 
         <dt className="product-review__text-key">Комментарий</dt>
         <dd className="product-review__text-value">{review.comment}</dd>
       </dl>
 
       <span className={ratingClassName}>
-        <span className="visually-hidden1">{review.rating} {formatStars(review.rating)}</span>
+        {humanizeRating(review.rating)}
       </span>
 
-      <span className="product-review__created-at">{humanizeAsDurationFromNow(review.createdAt)}</span>
+      <span className="product-review__created-at">
+        {humanizeAsDurationFromNow(review.createdAt)}
+      </span>
 
       <Link
         to={generatePath(LocalPath.PRODUCT_REVIEW_RESPONSE, review)}

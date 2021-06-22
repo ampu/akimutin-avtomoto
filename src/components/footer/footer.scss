@@ -7,9 +7,7 @@
 
 .footer__container {
   @include container();
-}
 
-.footer__secondary-navigation {
-  margin-left: 8px;
-  margin-right: 2px;
+  padding-left: 9px + $container-side-padding-desktop;
+  padding-right: 2px + $container-side-padding-desktop;
 }

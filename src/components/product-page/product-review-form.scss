@@ -1,5 +1,6 @@
 .product-review-form {
   position: fixed;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;
@@ -14,6 +15,7 @@
 .product-review-form__form {
   position: relative;
   padding: 30px 35px 35px;
+  box-sizing: border-box;
   width: 698px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -42,11 +44,14 @@
 
 .product-review-form__close-button {
   position: absolute;
-  right: 25px;
-  top: 25px;
+  z-index: 1;
+  right: 20px;
+  top: 20px;
+  padding: 0;
+  margin: 0;
   display: flex;
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
 
   cursor: pointer;
   background: transparent url("data:image/svg+xml,%3Csvg width='15' height='16' viewBox='0 0 15 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.6399 15.0096L7.50482 8.86495L1.36977 15.0096L0 13.6399L6.14469 7.50482L0 1.36978L1.36977 0L7.50482 6.14469L13.6399 0.00964652L15 1.36978L8.86495 7.50482L15 13.6399L13.6399 15.0096Z' fill='%239f9e9e'/%3E%3C/svg%3E%0A") no-repeat center center / 15px 15px;
@@ -75,7 +80,7 @@
 
 .product-review-form__input {
   box-sizing: border-box;
-  padding: 15px 25px;
+  padding: 14px 25px 15px;
   width: 100%;
   height: 100%;
   resize: none;
@@ -107,23 +112,53 @@
   margin-bottom: 16px;
 }
 
+.product-review-form__rating-container {
+  box-sizing: border-box;
+  height: 100%;
+  padding-bottom: 33px;
+  display: flex;
+  align-items: flex-end;
+}
+
 .product-review-form__rating {
   margin: 0;
   padding: 0;
+  clear: both;
 
   border: none;
 }
 
 .product-review-form__rating-legend {
-  margin: 0;
+  float: left;
   padding: 0;
-  display: inline-block;
-  vertical-align: middle;
+  margin: 0;
+  margin-top: 10px;
+  margin-right: 14px;
 
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 20px;
+}
+
+.product-review-form__rating label {
+  float: left;
+  margin-top: 4px;
+  margin-right: 8px;
+  display: flex;
+  width: 27px;
+  height: 28px;
+
+  cursor: pointer;
+  background: transparent url("data:image/svg+xml,%3Csvg width='17' height='16' viewBox='0 0 17 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.74375 0L10.6227 5.87336L16.7029 5.87336L11.7839 9.50329L13.6628 15.3766L8.74375 11.7467L3.82472 15.3766L5.70362 9.50329L0.784596 5.87336L6.86485 5.87336L8.74375 0Z' fill='%23d12136' fill-opacity='0.7'/%3E%3C/svg%3E") no-repeat center center / 27px 28px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.product-review-form__rating input:checked ~ label {
+  background: transparent url("data:image/svg+xml,%3Csvg width='17' height='16' viewBox='0 0 17 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.74375 0L10.6227 5.87336L16.7029 5.87336L11.7839 9.50329L13.6628 15.3766L8.74375 11.7467L3.82472 15.3766L5.70362 9.50329L0.784596 5.87336L6.86485 5.87336L8.74375 0Z' fill='%23bdbec2' fill-opacity='0.7'/%3E%3C/svg%3E") no-repeat center center / 27px 28px;
 }
 
 .product-review-form__comment {
@@ -139,10 +174,11 @@
 .product-review-form__submit-button {
   grid-column: 1 / -1;
   margin: 0 auto;
+  margin-top: 33px;
+  padding: 16px 19px;
   display: flex;
   justify-content: center;
-  margin-top: 35px;
-  padding: 16px 20px;
+  align-items: center;
 
   font-style: normal;
   font-weight: 600;

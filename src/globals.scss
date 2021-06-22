@@ -4,6 +4,7 @@
 
 .visually-hidden {
   position: absolute;
+  z-index: -1;
   width: 1px;
   height: 1px;
   margin: -1px;
@@ -32,6 +33,10 @@
 
   color: $primary-text-color;
   background-color: $primary-background-color;
+
+  &--modal {
+    overflow: hidden;
+  }
 }
 
 .page-layout {
@@ -48,7 +53,7 @@
 
     display: grid;
     grid-template-columns: 600px 1fr;
-    grid-column-gap: 57px;
+    grid-column-gap: 55px;
     grid-row-gap: 90px;
     margin-bottom: 140px;
   }
@@ -65,7 +70,7 @@
 
 .page-title {
   margin: 0;
-  margin-bottom: 19px;
+  margin-bottom: 21px;
 
   font-style: normal;
   font-weight: 700;

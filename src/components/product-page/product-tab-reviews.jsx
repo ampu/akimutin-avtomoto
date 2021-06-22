@@ -3,6 +3,7 @@ import {Link, generatePath} from 'react-router-dom';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
+import {postReview} from '../../helpers/review-helpers';
 
 import {ProductReview} from './product-review';
 import {ProductReviewForm} from './product-review-form';
@@ -10,7 +11,7 @@ import {ProductReviewForm} from './product-review-form';
 import {REVIEW_MOCKS} from '../../mocks/review-mocks';
 
 const ProductTabReviews = ({product}) => {
-  const reviews = REVIEW_MOCKS;
+  const [reviews, setReviews] = useState(REVIEW_MOCKS);
   const isEmpty = reviews.length === 0;
 
   const [hasReviewForm, toggleReviewForm] = useState(false);
@@ -25,6 +26,14 @@ const ProductTabReviews = ({product}) => {
     toggleReviewForm(false);
   }, []);
 
+  const onReviewFormSubmit = useCallback((localReview) => {
+    toggleReviewForm(false);
+
+    const review = postReview(product.id, localReview);
+
+    setReviews((oldReviews) => [review].concat(oldReviews));
+  }, [product.id]);
+
   return (
     <div className="product-tab-reviews">
       <Link
@@ -35,7 +44,11 @@ const ProductTabReviews = ({product}) => {
         Оставить отзыв
       </Link>
       {hasReviewForm && (
-        <ProductReviewForm product={product} onClose={onReviewFormClose}/>
+        <ProductReviewForm
+          product={product}
+          onClose={onReviewFormClose}
+          onSubmit={onReviewFormSubmit}
+        />
       )}
 
       {isEmpty && (
