@@ -1,31 +1,40 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {generatePath} from 'react-router-dom';
 import getClassName from 'classnames';
+import {range} from 'lodash';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
-import {deserializeLocalReview} from '../../helpers/review-helpers';
+import {formatStars} from '../../helpers/review-helpers';
+import {useMountedRef} from '../../hooks/use-mounted-ref';
+import {DEFAULT_LOCAL_REVIEW} from '../../constants/constants';
+import {localReviewStorage} from '../../helpers/local-review-storage';
 
 const ErrorMessage = {
   NONE: ``,
   REQUIRED: `Пожалуйста, заполните поле`,
 };
 
+const RATING_CONSTRAINT = {
+  min: 1,
+  max: 5,
+};
+
 const ProductReviewForm = ({product, onClose, onSubmit}) => {
-  const formRef = useRef(null);
+  const isMountedRef = useMountedRef();
+  const [localReview, setLocalReview] = useState(DEFAULT_LOCAL_REVIEW);
+  const [isRejected, setRejected] = useState(false);
   const [authorError, setAuthorError] = useState(ErrorMessage.NONE);
   const [commentError, setCommentError] = useState(ErrorMessage.NONE);
 
-  const onContainerClick = (evt) => {
-    if (evt.target === evt.currentTarget) {
-      onClose();
-    }
-  };
+  useEffect(() => {
+    setLocalReview(localReviewStorage.getItem());
+  }, []);
 
-  const onCloseButtonClick = () => {
-    onClose();
-  };
+  useEffect(() => {
+    localReviewStorage.setItem(localReview);
+  }, [localReview]);
 
   useEffect(() => {
     document.body.classList.add(`page-body--modal`);
@@ -34,6 +43,16 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
       document.body.classList.remove(`page-body--modal`);
     };
   }, []);
+
+  const onContainerMouseDown = (evt) => {
+    if (evt.target === evt.currentTarget) {
+      onClose();
+    }
+  };
+
+  const onCloseButtonClick = () => {
+    onClose();
+  };
 
   useEffect(() => {
     const onDocumentKeyDown = (evt) => {
@@ -53,12 +72,53 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
   }, [onClose]);
 
   const onAuthorInputChange = (evt) => {
+    const author = evt.target.value || DEFAULT_LOCAL_REVIEW.author;
+
+    setLocalReview((previousLocalReview) => ({
+      ...previousLocalReview,
+      author,
+    }));
+
     if (authorError === ErrorMessage.REQUIRED && evt.target.value) {
       setAuthorError(ErrorMessage.NONE);
     }
   };
 
+  const onAdvantagesInputChange = (evt) => {
+    const advantages = evt.target.value || DEFAULT_LOCAL_REVIEW.advantages;
+
+    setLocalReview((previousLocalReview) => ({
+      ...previousLocalReview,
+      advantages,
+    }));
+  };
+
+  const onDisadvantagesInputChange = (evt) => {
+    const disadvantages = evt.target.value || DEFAULT_LOCAL_REVIEW.disadvantages;
+
+    setLocalReview((previousLocalReview) => ({
+      ...previousLocalReview,
+      disadvantages,
+    }));
+  };
+
+  const onRatingInputChange = (evt) => {
+    const rating = +evt.target.value || DEFAULT_LOCAL_REVIEW.rating;
+
+    setLocalReview((previousLocalReview) => ({
+      ...previousLocalReview,
+      rating,
+    }));
+  };
+
   const onCommentInputChange = (evt) => {
+    const comment = evt.target.value || DEFAULT_LOCAL_REVIEW.comment;
+
+    setLocalReview((previousLocalReview) => ({
+      ...previousLocalReview,
+      comment,
+    }));
+
     if (commentError === ErrorMessage.REQUIRED && evt.target.value) {
       setCommentError(ErrorMessage.NONE);
     }
@@ -66,24 +126,37 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
+    setRejected(false);
 
-    const localReview = deserializeLocalReview(formRef.current);
-    let isValid = true;
+    setTimeout(() => {
+      if (!isMountedRef.current) {
+        return;
+      }
+      let isValid = true;
 
-    if (!localReview.author) {
-      isValid = false;
-      setAuthorError(ErrorMessage.REQUIRED);
-    }
+      if (!localReview.author) {
+        isValid = false;
+        setAuthorError(ErrorMessage.REQUIRED);
+      }
 
-    if (!localReview.comment) {
-      isValid = false;
-      setCommentError(ErrorMessage.REQUIRED);
-    }
+      if (!localReview.comment) {
+        isValid = false;
+        setCommentError(ErrorMessage.REQUIRED);
+      }
 
-    if (isValid) {
+      if (!isValid) {
+        setRejected(true);
+        return;
+      }
+
       onSubmit(localReview);
-    }
+    });
   };
+
+  const formClassName = getClassName({
+    [`product-review-form__form`]: true,
+    [`shake`]: isRejected,
+  });
 
   const authorInputClassName = getClassName({
     [`product-review-form__input`]: true,
@@ -98,10 +171,9 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
   });
 
   return (
-    <section className="product-review-form" onClick={onContainerClick}>
+    <section className="product-review-form" onMouseDown={onContainerMouseDown}>
       <form
-        ref={formRef}
-        className="product-review-form__form"
+        className={formClassName}
         method="post"
         action={generatePath(LocalPath.PRODUCT_REVIEW_POST, product)}
         onSubmit={onFormSubmit}
@@ -123,7 +195,9 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
             className={authorInputClassName}
             name="author"
             placeholder="Имя"
+            value={localReview.author}
             onChange={onAuthorInputChange}
+            autoFocus
           />
         </label>
 
@@ -133,41 +207,51 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
               Оцените товар:
             </legend>
 
-            <input className="visually-hidden" type="radio" name="rating" value="0" defaultChecked disabled/>
+            <input className="visually-hidden" type="radio" name="rating" value="0" checked={localReview.rating === 0} disabled/>
 
-            <label htmlFor="product-review-form-rating-1">
-              <span className="visually-hidden">1 звезда</span>
-            </label>
-            <input id="product-review-form-rating-1" className="visually-hidden" type="radio" name="rating" value="1"/>
+            {range(RATING_CONSTRAINT.min, RATING_CONSTRAINT.max + 1).map((value) => {
+              const ratingId = `product-review-form-rating-${value}`;
 
-            <label htmlFor="product-review-form-rating-2">
-              <span className="visually-hidden">2 звезды</span>
-            </label>
-            <input id="product-review-form-rating-2" className="visually-hidden" type="radio" name="rating" value="2"/>
-
-            <label htmlFor="product-review-form-rating-3">
-              <span className="visually-hidden">3 звезды</span>
-            </label>
-            <input id="product-review-form-rating-3" className="visually-hidden" type="radio" name="rating" value="3"/>
-
-            <label htmlFor="product-review-form-rating-4">
-              <span className="visually-hidden">4 звезды</span>
-            </label>
-            <input id="product-review-form-rating-4" className="visually-hidden" type="radio" name="rating" value="4"/>
-
-            <label htmlFor="product-review-form-rating-5">
-              <span className="visually-hidden">5 звёзд</span>
-            </label>
-            <input id="product-review-form-rating-5" className="visually-hidden" type="radio" name="rating" value="5"/>
+              return (
+                <Fragment key={ratingId}>
+                  <label htmlFor={ratingId}>
+                    <span className="visually-hidden">{value} {formatStars(value)}</span>
+                  </label>
+                  <input
+                    type="radio"
+                    id={ratingId}
+                    className="visually-hidden"
+                    name="rating"
+                    value={value}
+                    checked={localReview.rating === value}
+                    onChange={onRatingInputChange}
+                  />
+                </Fragment>
+              );
+            })}
           </fieldset>
         </div>
 
         <label className="product-review-form__advantages">
-          <input type="text" className="product-review-form__input" name="advantages" placeholder="Достоинства"/>
+          <input
+            type="text"
+            className="product-review-form__input"
+            name="advantages"
+            placeholder="Достоинства"
+            value={localReview.advantages}
+            onChange={onAdvantagesInputChange}
+          />
         </label>
 
         <label className="product-review-form__disadvantages">
-          <input type="text" className="product-review-form__input" name="disadvantages" placeholder="Недостатки"/>
+          <input
+            type="text"
+            className="product-review-form__input"
+            name="disadvantages"
+            placeholder="Недостатки"
+            value={localReview.disadvantages}
+            onChange={onDisadvantagesInputChange}
+          />
         </label>
 
         <label className="product-review-form__comment">
@@ -176,6 +260,7 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
             className={commentInputClassName}
             name="comment"
             placeholder="Комментарий"
+            value={localReview.comment}
             onChange={onCommentInputChange}
           />
         </label>

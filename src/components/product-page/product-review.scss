@@ -129,31 +129,31 @@
 
   &--stars-1 {
     &::after {
-      width: (103px * 1 / 5);
+      width: (103px * 0.2);
     }
   }
 
   &--stars-2 {
     &::after {
-      width: (103px * 2 / 5);
+      width: (103px * 0.4);
     }
   }
 
   &--stars-3 {
     &::after {
-      width: (103px * 3 / 5);
+      width: (103px * 0.6);
     }
   }
 
   &--stars-4 {
     &::after {
-      width: (103px * 4 / 5);
+      width: (103px * 0.8);
     }
   }
 
   &--stars-5 {
     &::after {
-      width: (103px * 5 / 5);
+      width: 103px;
     }
   }
 }

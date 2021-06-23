@@ -37,22 +37,6 @@ const humanizeRating = (rating) => {
   return rating >= RECOMMENDED_RATING_THRESHOLD ? `Советует` : `Не рекомендует`;
 };
 
-/**
- * @param {HTMLFormElement} form
- * @return {LocalReview}
- */
-const deserializeLocalReview = (form) => {
-  const data = new FormData(form);
-
-  return {
-    rating: +data.get(`rating`) || 0,
-    author: data.get(`author`) || ``,
-    advantages: data.get(`advantages`) || ``,
-    disadvantages: data.get(`disadvantages`) || ``,
-    comment: data.get(`comment`) || ``,
-  };
-};
-
 const postReview = (productId, localReview) => {
   return {
     id: generateId(),
@@ -71,6 +55,5 @@ export {
   serializeDateTime,
   formatStars,
   humanizeRating,
-  deserializeLocalReview,
   postReview,
 };

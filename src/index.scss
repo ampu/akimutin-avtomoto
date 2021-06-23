@@ -1,5 +1,5 @@
 @import "~normalize.css/normalize.css";
-@import "./constants/variables";
+@import "./constants/constants";
 @import "./mixins";
 @import "./globals";
 @import "./components/header/primary-navigation";
@@ -12,6 +12,7 @@
 @import "./components/product-page/product-review";
 @import "./components/product-page/product-review-form";
 @import "./components/product-page/product-tab-reviews";
+@import "./components/product-page/office-map";
 @import "./components/product-page/product-tab-contacts";
 @import "./components/footer/secondary-navigation";
 @import "./components/footer/footer";

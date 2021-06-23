@@ -10,19 +10,15 @@ const ProductSlider = ({product}) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const onBackArrowClick = () => {
-    setActiveImageIndex((backActiveImageIndex) => (
-      clamp(backActiveImageIndex - 1, 0, lastImageIndex)
+    setActiveImageIndex((previousActiveImageIndex) => (
+      clamp(previousActiveImageIndex - 1, 0, lastImageIndex)
     ));
   };
 
   const onNextArrowClick = () => {
-    setActiveImageIndex((backActiveImageIndex) => (
-      clamp(backActiveImageIndex + 1, 0, lastImageIndex)
+    setActiveImageIndex((previousActiveImageIndex) => (
+      clamp(previousActiveImageIndex + 1, 0, lastImageIndex)
     ));
-  };
-
-  const onThumbnailButtonClick = (evt) => {
-    setActiveImageIndex(+evt.currentTarget.dataset.thumbnailIndex);
   };
 
   const activeImageContainerClassName = getClassName({
@@ -77,30 +73,16 @@ const ProductSlider = ({product}) => {
         </button>
 
         <ul className="product-slider__thumbnails">
-          {product.thumbnails.map((thumbnail, thumbnailIndex) => {
-            const buttonClassName = getClassName({
-              [`product-slider__thumbnail-button`]: true,
-              [`active`]: activeImageIndex === thumbnailIndex,
-            });
-            return (
-              <li key={thumbnail} className="product-slider__thumbnails-item">
-                <button
-                  type="button"
-                  className={buttonClassName}
-                  aria-label={`Выбрать изображение ${product.title} №${thumbnailIndex + 1}`}
-                  onClick={onThumbnailButtonClick}
-                  data-thumbnail-index={thumbnailIndex}
-                >
-                  <img
-                    className="product-slider__thumbnail-image"
-                    src={thumbnail}
-                    alt={`Превью ${product.title} №${thumbnailIndex + 1}`}
-                    width="128" height="80"
-                  />
-                </button>
-              </li>
-            );
-          })}
+          {product.thumbnails.map((thumbnail, thumbnailIndex) => (
+            <li key={thumbnail} className="product-slider__thumbnails-item">
+              <img
+                className="product-slider__thumbnail-image"
+                src={thumbnail}
+                alt={`Превью ${product.title} №${thumbnailIndex + 1}`}
+                width="128" height="80"
+              />
+            </li>
+          ))}
         </ul>
       </div>
     </div>

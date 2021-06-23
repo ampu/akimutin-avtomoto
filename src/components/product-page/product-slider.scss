@@ -96,32 +96,9 @@
   margin-right: -25px;
 }
 
-.product-slider__thumbnail-button {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  margin-right: 25px;
-
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-
-  &:hover {
-    opacity: 0.7;
-  }
-
-  &:active {
-    opacity: 0.7;
-  }
-
-  &.active {
-    pointer-events: none;
-    cursor: default;
-    opacity: 0.7;
-  }
-}
-
 .product-slider__thumbnail-image {
+  margin-right: 25px;
   width: 128px;
   height: 80px;
+  display: table;
 }

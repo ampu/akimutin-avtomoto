@@ -1,25 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Link, generatePath} from 'react-router-dom';
 import getClassName from 'classnames';
 
 import {reviewShape} from '../../types/review-types';
 import {humanizeAsDurationFromNow, humanizeRating} from '../../helpers/review-helpers';
 import {LocalPath} from '../../constants/local-path';
+import {useIntervalRerender} from '../../hooks/use-interval-rerender';
 
-const REVIEW_RERENDER_INTERVAL = 60 * 1000;
+const RERENDER_TIMEOUT = 60 * 1000;
 
 const ProductReview = ({review}) => {
-  const [, setRenderRevision] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setRenderRevision((previousRenderRevision) => previousRenderRevision + 1);
-    }, REVIEW_RERENDER_INTERVAL);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+  useIntervalRerender(RERENDER_TIMEOUT);
 
   const ratingClassName = getClassName({
     [`product-review__rating`]: true,
