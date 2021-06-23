@@ -4,6 +4,8 @@
 
 .visually-hidden {
   position: absolute;
+  left: 1px;
+  top: 1px;
   z-index: -1;
   width: 1px;
   height: 1px;

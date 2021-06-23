@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {NavLink} from 'react-router-dom';
-import getClassName from 'classnames';
 
 import {LocalPath} from '../../constants/local-path';
 
-const SecondaryNavigation = ({className}) => {
+const SecondaryNavigation = () => {
   return (
-    <ul className={getClassName(`secondary-navigation`, className)}>
+    <ul className="secondary-navigation">
       <li className="secondary-navigation__item">
         <NavLink className="page-link" exact to={LocalPath.CORPORATE_CLIENTS}>Корпоративным клиентам</NavLink>
       </li>
@@ -31,10 +29,6 @@ const SecondaryNavigation = ({className}) => {
       </li>
     </ul>
   );
-};
-
-SecondaryNavigation.propTypes = {
-  className: PropTypes.string,
 };
 
 export {SecondaryNavigation};

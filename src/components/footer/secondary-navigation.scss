@@ -1,6 +1,7 @@
 .secondary-navigation {
   list-style: none;
   margin: 0;
+  margin-right: -25px;
   padding: 0;
   display: flex;
   flex-flow: wrap;
@@ -8,9 +9,5 @@
 }
 
 .secondary-navigation__item {
-  margin-left: 25px;
-
-  &:first-of-type {
-    margin-left: 0;
-  }
+  margin-right: 25px;
 }

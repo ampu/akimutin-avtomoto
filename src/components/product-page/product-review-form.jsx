@@ -1,15 +1,17 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useCallback, useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {generatePath} from 'react-router-dom';
 import getClassName from 'classnames';
 import {range} from 'lodash';
+import FocusTrap from 'focus-trap-react';
 
 import {LocalPath} from '../../constants/local-path';
+import {DEFAULT_LOCAL_REVIEW} from '../../constants/constants';
 import {productShape} from '../../types/product-types';
 import {formatStars} from '../../helpers/review-helpers';
-import {useMountedRef} from '../../hooks/use-mounted-ref';
-import {DEFAULT_LOCAL_REVIEW} from '../../constants/constants';
 import {localReviewStorage} from '../../helpers/local-review-storage';
+import {useMountedRef} from '../../hooks/use-mounted-ref';
+import {useKeyDownStack} from '../../hooks/use-keydown-stack';
 
 const ErrorMessage = {
   NONE: ``,
@@ -23,6 +25,9 @@ const RATING_CONSTRAINT = {
 
 const ProductReviewForm = ({product, onClose, onSubmit}) => {
   const isMountedRef = useMountedRef();
+  const authorInputRef = useRef(null);
+  const commentInputRef = useRef(null);
+
   const [localReview, setLocalReview] = useState(DEFAULT_LOCAL_REVIEW);
   const [isRejected, setRejected] = useState(false);
   const [authorError, setAuthorError] = useState(ErrorMessage.NONE);
@@ -33,7 +38,7 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
   }, []);
 
   useEffect(() => {
-    localReviewStorage.setItem(localReview);
+    localReviewStorage.setItemWithThrottling(localReview);
   }, [localReview]);
 
   useEffect(() => {
@@ -54,22 +59,16 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
     onClose();
   };
 
-  useEffect(() => {
-    const onDocumentKeyDown = (evt) => {
-      if (evt.key === `Escape`) {
-        evt.preventDefault();
-        evt.stopPropagation();
+  const onDocumentKeyDown = useCallback((evt) => {
+    if (evt.key === `Escape`) {
+      evt.preventDefault();
+      evt.stopPropagation();
 
-        onClose();
-      }
-    };
-
-    document.addEventListener(`keydown`, onDocumentKeyDown);
-
-    return () => {
-      document.removeEventListener(`keydown`, onDocumentKeyDown);
-    };
+      onClose();
+    }
   }, [onClose]);
+
+  useKeyDownStack(onDocumentKeyDown);
 
   const onAuthorInputChange = (evt) => {
     const author = evt.target.value || DEFAULT_LOCAL_REVIEW.author;
@@ -133,15 +132,26 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
         return;
       }
       let isValid = true;
+      let focusInputRef = null;
 
       if (!localReview.author) {
         isValid = false;
+        if (!focusInputRef) {
+          focusInputRef = authorInputRef;
+        }
         setAuthorError(ErrorMessage.REQUIRED);
       }
 
       if (!localReview.comment) {
         isValid = false;
+        if (!focusInputRef) {
+          focusInputRef = commentInputRef;
+        }
         setCommentError(ErrorMessage.REQUIRED);
+      }
+
+      if (focusInputRef) {
+        focusInputRef.current.focus();
       }
 
       if (!isValid) {
@@ -171,105 +181,118 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
   });
 
   return (
-    <section className="product-review-form" onMouseDown={onContainerMouseDown}>
-      <form
-        className={formClassName}
-        method="post"
-        action={generatePath(LocalPath.PRODUCT_REVIEW_POST, product)}
-        onSubmit={onFormSubmit}
-      >
-        <h2 className="product-review-form__title">Оставить отзыв</h2>
-
-        <button
-          type="button"
-          className="product-review-form__close-button"
-          onClick={onCloseButtonClick}
+    <FocusTrap>
+      <section className="product-review-form" onMouseDown={onContainerMouseDown}>
+        <form
+          className={formClassName}
+          method="post"
+          action={generatePath(LocalPath.PRODUCT_REVIEW_POST, product)}
+          onSubmit={onFormSubmit}
         >
-          <span className="visually-hidden">Закрыть</span>
-        </button>
+          <h2 className="product-review-form__title">Оставить отзыв</h2>
 
-        <label className="product-review-form__author">
-          {authorError && <span className="product-review-form__error-message">{authorError}</span>}
-          <input
-            type="text"
-            className={authorInputClassName}
-            name="author"
-            placeholder="Имя"
-            value={localReview.author}
-            onChange={onAuthorInputChange}
-            autoFocus
-          />
-        </label>
+          <button
+            type="button"
+            className="product-review-form__close-button"
+            onClick={onCloseButtonClick}
+          >
+            <span className="visually-hidden">Закрыть</span>
+          </button>
 
-        <div className="product-review-form__rating-container">
-          <fieldset className="product-review-form__rating">
-            <legend className="product-review-form__rating-legend">
-              Оцените товар:
-            </legend>
+          <label className="product-review-form__author">
+            {authorError && <span className="product-review-form__error-message">{authorError}</span>}
+            <input
+              ref={authorInputRef}
+              type="text"
+              className={authorInputClassName}
+              name="author"
+              placeholder="Имя"
+              value={localReview.author}
+              onChange={onAuthorInputChange}
+              autoFocus
+            />
+          </label>
 
-            <input className="visually-hidden" type="radio" name="rating" value="0" checked={localReview.rating === 0} disabled/>
+          <div className="product-review-form__rating-container">
+            <fieldset className="product-review-form__rating">
+              <legend className="product-review-form__rating-legend">
+                Оцените товар:
+              </legend>
 
-            {range(RATING_CONSTRAINT.min, RATING_CONSTRAINT.max + 1).map((value) => {
-              const ratingId = `product-review-form-rating-${value}`;
+              <div className="product-review-form__rating-outline-container">
+                <input
+                  type="radio"
+                  className="visually-hidden"
+                  name="rating"
+                  value="0"
+                  checked={localReview.rating === 0}
+                  onChange={onRatingInputChange}
+                />
 
-              return (
-                <Fragment key={ratingId}>
-                  <label htmlFor={ratingId}>
-                    <span className="visually-hidden">{value} {formatStars(value)}</span>
-                  </label>
-                  <input
-                    type="radio"
-                    id={ratingId}
-                    className="visually-hidden"
-                    name="rating"
-                    value={value}
-                    checked={localReview.rating === value}
-                    onChange={onRatingInputChange}
-                  />
-                </Fragment>
-              );
-            })}
-          </fieldset>
-        </div>
+                {range(RATING_CONSTRAINT.min, RATING_CONSTRAINT.max + 1).map((value) => {
+                  const ratingId = `product-review-form-rating-${value}`;
 
-        <label className="product-review-form__advantages">
-          <input
-            type="text"
-            className="product-review-form__input"
-            name="advantages"
-            placeholder="Достоинства"
-            value={localReview.advantages}
-            onChange={onAdvantagesInputChange}
-          />
-        </label>
+                  return (
+                    <Fragment key={ratingId}>
+                      <input
+                        type="radio"
+                        id={ratingId}
+                        className="visually-hidden"
+                        name="rating"
+                        value={value}
+                        checked={localReview.rating === value}
+                        onChange={onRatingInputChange}
+                      />
+                      <label htmlFor={ratingId}>
+                        <span className="visually-hidden">{value} {formatStars(value)}</span>
+                      </label>
+                    </Fragment>
+                  );
+                })}
+              </div>
+            </fieldset>
+          </div>
 
-        <label className="product-review-form__disadvantages">
-          <input
-            type="text"
-            className="product-review-form__input"
-            name="disadvantages"
-            placeholder="Недостатки"
-            value={localReview.disadvantages}
-            onChange={onDisadvantagesInputChange}
-          />
-        </label>
+          <label className="product-review-form__advantages">
+            <input
+              type="text"
+              className="product-review-form__input"
+              name="advantages"
+              placeholder="Достоинства"
+              value={localReview.advantages}
+              onChange={onAdvantagesInputChange}
+            />
+          </label>
 
-        <label className="product-review-form__comment">
-          {commentError && <span className="product-review-form__error-message">{commentError}</span>}
-          <textarea
-            className={commentInputClassName}
-            name="comment"
-            placeholder="Комментарий"
-            value={localReview.comment}
-            onChange={onCommentInputChange}
-          />
-        </label>
+          <label className="product-review-form__disadvantages">
+            <input
+              type="text"
+              className="product-review-form__input"
+              name="disadvantages"
+              placeholder="Недостатки"
+              value={localReview.disadvantages}
+              onChange={onDisadvantagesInputChange}
+            />
+          </label>
 
-        <button className="product-review-form__submit-button" type="submit">
-          Оставить отзыв
-        </button>
-      </form>
-    </section>
+          <label className="product-review-form__comment">
+            {commentError && <span className="product-review-form__error-message">{commentError}</span>}
+            <textarea
+              ref={commentInputRef}
+              className={commentInputClassName}
+              name="comment"
+              placeholder="Комментарий"
+              value={localReview.comment}
+              onChange={onCommentInputChange}
+            />
+          </label>
+
+          <button className="product-review-form__submit-button" type="submit">
+            Оставить отзыв
+          </button>
+        </form>
+      </section>
+    </FocusTrap>
   );
 };
 
