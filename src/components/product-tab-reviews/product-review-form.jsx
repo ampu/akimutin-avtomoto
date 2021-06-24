@@ -1,4 +1,4 @@
-import React, {Fragment, useCallback, useEffect, useRef, useState} from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {generatePath} from 'react-router-dom';
 import getClassName from 'classnames';
@@ -6,165 +6,29 @@ import {range} from 'lodash';
 import FocusTrap from 'focus-trap-react';
 
 import {LocalPath} from '../../constants/local-path';
-import {DEFAULT_LOCAL_REVIEW} from '../../constants/constants';
 import {productShape} from '../../types/product-types';
+import {localReviewShape} from '../../types/review-types';
 import {formatStars} from '../../helpers/review-helpers';
-import {localReviewStorage} from '../../helpers/local-review-storage';
-import {useMountedRef} from '../../hooks/use-mounted-ref';
-import {useKeyDownStack} from '../../hooks/use-keydown-stack';
-
-const ErrorMessage = {
-  NONE: ``,
-  REQUIRED: `Пожалуйста, заполните поле`,
-};
+import {withReviewFormState} from '../../hocs/with-review-form-state';
 
 const RATING_CONSTRAINT = {
   min: 1,
   max: 5,
 };
 
-const ProductReviewForm = ({product, onClose, onSubmit}) => {
-  const isMountedRef = useMountedRef();
-  const authorInputRef = useRef(null);
-  const commentInputRef = useRef(null);
-
-  const [localReview, setLocalReview] = useState(DEFAULT_LOCAL_REVIEW);
-  const [isRejected, setRejected] = useState(false);
-  const [authorError, setAuthorError] = useState(ErrorMessage.NONE);
-  const [commentError, setCommentError] = useState(ErrorMessage.NONE);
-
-  useEffect(() => {
-    setLocalReview(localReviewStorage.getItem());
-  }, []);
-
-  useEffect(() => {
-    localReviewStorage.setItemWithThrottling(localReview);
-  }, [localReview]);
-
-  useEffect(() => {
-    document.body.classList.add(`page-body--modal`);
-
-    return () => {
-      document.body.classList.remove(`page-body--modal`);
-    };
-  }, []);
-
-  const onContainerMouseDown = (evt) => {
-    if (evt.target === evt.currentTarget) {
-      onClose();
-    }
-  };
-
-  const onCloseButtonClick = () => {
-    onClose();
-  };
-
-  const onDocumentKeyDown = useCallback((evt) => {
-    if (evt.key === `Escape`) {
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      onClose();
-    }
-  }, [onClose]);
-
-  useKeyDownStack(onDocumentKeyDown);
-
-  const onAuthorInputChange = (evt) => {
-    const author = evt.target.value || DEFAULT_LOCAL_REVIEW.author;
-
-    setLocalReview((previousLocalReview) => ({
-      ...previousLocalReview,
-      author,
-    }));
-
-    if (authorError === ErrorMessage.REQUIRED && evt.target.value) {
-      setAuthorError(ErrorMessage.NONE);
-    }
-  };
-
-  const onAdvantagesInputChange = (evt) => {
-    const advantages = evt.target.value || DEFAULT_LOCAL_REVIEW.advantages;
-
-    setLocalReview((previousLocalReview) => ({
-      ...previousLocalReview,
-      advantages,
-    }));
-  };
-
-  const onDisadvantagesInputChange = (evt) => {
-    const disadvantages = evt.target.value || DEFAULT_LOCAL_REVIEW.disadvantages;
-
-    setLocalReview((previousLocalReview) => ({
-      ...previousLocalReview,
-      disadvantages,
-    }));
-  };
-
-  const onRatingInputChange = (evt) => {
-    const rating = +evt.target.value || DEFAULT_LOCAL_REVIEW.rating;
-
-    setLocalReview((previousLocalReview) => ({
-      ...previousLocalReview,
-      rating,
-    }));
-  };
-
-  const onCommentInputChange = (evt) => {
-    const comment = evt.target.value || DEFAULT_LOCAL_REVIEW.comment;
-
-    setLocalReview((previousLocalReview) => ({
-      ...previousLocalReview,
-      comment,
-    }));
-
-    if (commentError === ErrorMessage.REQUIRED && evt.target.value) {
-      setCommentError(ErrorMessage.NONE);
-    }
-  };
-
-  const onFormSubmit = (evt) => {
-    evt.preventDefault();
-    setRejected(false);
-
-    setTimeout(() => {
-      if (!isMountedRef.current) {
-        return;
-      }
-      let isValid = true;
-      let focusInputRef = null;
-
-      if (!localReview.author) {
-        isValid = false;
-        if (!focusInputRef) {
-          focusInputRef = authorInputRef;
-        }
-        setAuthorError(ErrorMessage.REQUIRED);
-      }
-
-      if (!localReview.comment) {
-        isValid = false;
-        if (!focusInputRef) {
-          focusInputRef = commentInputRef;
-        }
-        setCommentError(ErrorMessage.REQUIRED);
-      }
-
-      if (focusInputRef) {
-        focusInputRef.current.focus();
-      }
-
-      if (!isValid) {
-        setRejected(true);
-        return;
-      }
-
-      onSubmit(localReview);
-    });
-  };
-
+const ProductReviewForm = ({
+  product,
+  localReview,
+  hasBounceAnimation, isRejected,
+  authorError, commentError,
+  onFormSubmit,
+  onCloseButtonClick, onContainerMouseDown,
+  authorInputRef, commentInputRef,
+  onAuthorInputChange, onRatingInputChange, onAdvantagesInputChange, onDisadvantagesInputChange, onCommentInputChange,
+}) => {
   const formClassName = getClassName({
     [`product-review-form__form`]: true,
+    [`bounce`]: hasBounceAnimation,
     [`shake`]: isRejected,
   });
 
@@ -222,7 +86,7 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
               <div className="product-review-form__rating-outline-container">
                 <input
                   type="radio"
-                  className="visually-hidden"
+                  className="product-review-form__rating-input visually-hidden"
                   name="rating"
                   value="0"
                   checked={localReview.rating === 0}
@@ -237,13 +101,16 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
                       <input
                         type="radio"
                         id={ratingId}
-                        className="visually-hidden"
+                        className="product-review-form__rating-input visually-hidden"
                         name="rating"
                         value={value}
                         checked={localReview.rating === value}
                         onChange={onRatingInputChange}
                       />
                       <label htmlFor={ratingId}>
+                        <svg width="27" height="28" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.74375 0L10.6227 5.87336L16.7029 5.87336L11.7839 9.50329L13.6628 15.3766L8.74375 11.7467L3.82472 15.3766L5.70362 9.50329L0.784596 5.87336L6.86485 5.87336L8.74375 0Z" fill="#d12136"/>
+                        </svg>
                         <span className="visually-hidden">{value} {formatStars(value)}</span>
                       </label>
                     </Fragment>
@@ -298,8 +165,27 @@ const ProductReviewForm = ({product, onClose, onSubmit}) => {
 
 ProductReviewForm.propTypes = {
   product: productShape.isRequired,
-  onClose: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  localReview: localReviewShape.isRequired,
+  hasBounceAnimation: PropTypes.bool.isRequired,
+  isRejected: PropTypes.bool.isRequired,
+  authorError: PropTypes.string.isRequired,
+  commentError: PropTypes.string.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
+  onCloseButtonClick: PropTypes.func.isRequired,
+  onContainerMouseDown: PropTypes.func.isRequired,
+  authorInputRef: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLInputElement),
+  }).isRequired,
+  commentInputRef: PropTypes.shape({
+    current: PropTypes.instanceOf(HTMLTextAreaElement),
+  }).isRequired,
+  onAuthorInputChange: PropTypes.func.isRequired,
+  onRatingInputChange: PropTypes.func.isRequired,
+  onAdvantagesInputChange: PropTypes.func.isRequired,
+  onDisadvantagesInputChange: PropTypes.func.isRequired,
+  onCommentInputChange: PropTypes.func.isRequired,
 };
 
-export {ProductReviewForm};
+const ProductReviewFormWithState = withReviewFormState(ProductReviewForm);
+
+export {ProductReviewForm, ProductReviewFormWithState};

@@ -1,38 +1,24 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {Link, generatePath} from 'react-router-dom';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
-import {postReview} from '../../helpers/review-helpers';
+import {reviewsType} from '../../types/review-types';
 
-import {ProductReview} from './product-review';
-import {ProductReviewForm} from './product-review-form';
+import {ProductReviewWithIntervalRerender as ProductReview} from './product-review';
+import {ProductReviewFormWithState as ProductReviewForm} from './product-review-form';
+import {withReviewForm} from '../../hocs/with-review-form';
 
-import {REVIEW_MOCKS} from '../../mocks/review-mocks';
-
-const ProductTabReviews = ({product}) => {
-  const [reviews, setReviews] = useState(REVIEW_MOCKS);
+const ProductTabReviews = ({
+  product,
+  reviews,
+  hasReviewForm,
+  onWriteReviewLinkClick,
+  onReviewFormClose,
+  onReviewFormSubmit,
+}) => {
   const isEmpty = reviews.length === 0;
-
-  const [hasReviewForm, toggleReviewForm] = useState(false);
-
-  const onWriteReviewLinkClick = (evt) => {
-    evt.preventDefault();
-
-    toggleReviewForm(true);
-  };
-
-  const onReviewFormClose = useCallback(() => {
-    toggleReviewForm(false);
-  }, []);
-
-  const onReviewFormSubmit = useCallback((localReview) => {
-    toggleReviewForm(false);
-
-    const review = postReview(product.id, localReview);
-
-    setReviews((oldReviews) => [review].concat(oldReviews));
-  }, [product.id]);
 
   return (
     <div className="product-tab-reviews">
@@ -69,6 +55,13 @@ const ProductTabReviews = ({product}) => {
 
 ProductTabReviews.propTypes = {
   product: productShape.isRequired,
+  reviews: reviewsType,
+  hasReviewForm: PropTypes.bool.isRequired,
+  onWriteReviewLinkClick: PropTypes.func.isRequired,
+  onReviewFormClose: PropTypes.func.isRequired,
+  onReviewFormSubmit: PropTypes.func.isRequired,
 };
 
-export {ProductTabReviews};
+const ProductTabReviewsWithReviewForm = withReviewForm(ProductTabReviews);
+
+export {ProductTabReviews, ProductTabReviewsWithReviewForm};

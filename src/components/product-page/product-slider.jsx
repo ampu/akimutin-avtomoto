@@ -1,26 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import getClassName from 'classnames';
-import {clamp} from 'lodash';
 
 import {productShape} from '../../types/product-types';
+import {withActiveImage} from '../../hocs/with-active-image';
 
-const ProductSlider = ({product}) => {
-  const lastImageIndex = product.thumbnails.length - 1;
-
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-
-  const onBackArrowClick = () => {
-    setActiveImageIndex((previousActiveImageIndex) => (
-      clamp(previousActiveImageIndex - 1, 0, lastImageIndex)
-    ));
-  };
-
-  const onNextArrowClick = () => {
-    setActiveImageIndex((previousActiveImageIndex) => (
-      clamp(previousActiveImageIndex + 1, 0, lastImageIndex)
-    ));
-  };
-
+const ProductSlider = ({
+  product,
+  activeImageIndex,
+  isBackArrowEnabled, onBackArrowClick,
+  isNextArrowEnabled, onNextArrowClick,
+}) => {
   const activeImageContainerClassName = getClassName({
     [`product-slider__active-image-container`]: true,
     [`product-slider__active-image-container--new-model`]: true,
@@ -43,7 +33,7 @@ const ProductSlider = ({product}) => {
           <img
             className="product-slider__active-image"
             src={product.images[activeImageIndex]}
-            alt={`Изображение ${product.title}`}
+            alt={`Изображение «${product.title}» №${activeImageIndex + 1}`}
             width="600" height="375"
           />
         </a>
@@ -54,7 +44,7 @@ const ProductSlider = ({product}) => {
           className={backArrowClassName}
           aria-label={`Выбрать предыдущее изображение ${product.title}`}
           onClick={onBackArrowClick}
-          disabled={activeImageIndex === 0}
+          disabled={!isBackArrowEnabled}
         >
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.0043 26.1719L22.9184 20.3686M17.0043 26.1719L22.6929 31.9692M17.0043 26.1719L35.9813 26.3513"/>
@@ -65,7 +55,7 @@ const ProductSlider = ({product}) => {
           className={nextArrowPathClassName}
           aria-label={`Выбрать следующее изображение ${product.title}`}
           onClick={onNextArrowClick}
-          disabled={activeImageIndex === lastImageIndex}
+          disabled={!isNextArrowEnabled}
         >
           <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M34.9873 26.1719L29.0747 20.3686M34.9873 26.1719L29.3001 31.9692M34.9873 26.1719L16.0151 26.3513"/>
@@ -78,7 +68,7 @@ const ProductSlider = ({product}) => {
               <img
                 className="product-slider__thumbnail-image"
                 src={thumbnail}
-                alt={`Превью ${product.title} №${thumbnailIndex + 1}`}
+                alt={`Превью «${product.title}» №${thumbnailIndex + 1}`}
                 width="128" height="80"
               />
             </li>
@@ -91,6 +81,13 @@ const ProductSlider = ({product}) => {
 
 ProductSlider.propTypes = {
   product: productShape.isRequired,
+  activeImageIndex: PropTypes.number.isRequired,
+  isBackArrowEnabled: PropTypes.bool.isRequired,
+  onBackArrowClick: PropTypes.func.isRequired,
+  isNextArrowEnabled: PropTypes.bool.isRequired,
+  onNextArrowClick: PropTypes.func.isRequired,
 };
 
-export {ProductSlider};
+const ProductSliderWithActiveImage = withActiveImage(ProductSlider);
+
+export {ProductSlider, ProductSliderWithActiveImage};

@@ -7,7 +7,7 @@ const onDocumentKeyDown = (evt) => {
   activeCallback(evt);
 };
 
-const useKeyDownStack = (callback) => {
+export const useKeyDownStack = (callback) => {
   useEffect(() => {
     callbacks.push(callback);
     if (callbacks.length === 1) {
@@ -22,5 +22,3 @@ const useKeyDownStack = (callback) => {
     };
   }, [callback]);
 };
-
-export {useKeyDownStack};

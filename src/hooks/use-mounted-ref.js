@@ -1,6 +1,6 @@
 import {useRef, useEffect} from 'react';
 
-const useMountedRef = () => {
+export const useMountedRef = () => {
   const isMountedRef = useRef(false);
 
   useEffect(() => {
@@ -13,5 +13,3 @@ const useMountedRef = () => {
 
   return isMountedRef;
 };
-
-export {useMountedRef};

@@ -5,13 +5,11 @@ import getClassName from 'classnames';
 import {reviewShape} from '../../types/review-types';
 import {humanizeAsDurationFromNow, humanizeRating} from '../../helpers/review-helpers';
 import {LocalPath} from '../../constants/local-path';
-import {useIntervalRerender} from '../../hooks/use-interval-rerender';
+import {withIntervalRerender} from '../../hocs/with-interval-rerender';
 
 const RERENDER_TIMEOUT = 60 * 1000;
 
 const ProductReview = ({review}) => {
-  useIntervalRerender(RERENDER_TIMEOUT);
-
   const ratingClassName = getClassName({
     [`product-review__rating`]: true,
     [`product-review__rating--stars-1`]: review.rating === 1,
@@ -62,4 +60,6 @@ ProductReview.propTypes = {
   review: reviewShape.isRequired,
 };
 
-export {ProductReview};
+const ProductReviewWithIntervalRerender = withIntervalRerender(ProductReview, RERENDER_TIMEOUT);
+
+export {ProductReview, ProductReviewWithIntervalRerender};

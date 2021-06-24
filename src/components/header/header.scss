@@ -5,7 +5,7 @@
   background-color: $secondary-background-color;
 }
 
-.header__navigation {
+.header__container {
   @include container();
 
   display: grid;

@@ -20,30 +20,12 @@
   clip-path: inset(100%);
 }
 
-.shake {
-  animation: shake 0.6s;
+.bounce {
+  animation: bounce 0.6s;
 }
 
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-5px);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(5px);
-  }
+.shake {
+  animation: shake 0.6s;
 }
 
 .page {
@@ -76,7 +58,7 @@
 .page-main {
   width: 100%;
 
-  &--product-page {
+  &--product {
     @include container();
 
     display: grid;
@@ -86,7 +68,7 @@
     margin-bottom: 140px;
   }
 
-  &--not-found-page {
+  &--not-found {
     @include container();
 
     display: flex;

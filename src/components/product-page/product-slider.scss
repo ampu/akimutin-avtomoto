@@ -13,6 +13,8 @@
   margin-bottom: 39px;
   display: flex;
 
+  background-color: $secondary-background-color;
+
   &--new-model {
     &::before {
       content: "new model";
@@ -40,9 +42,11 @@
 }
 
 .product-slider__active-image {
-  display: flex;
   width: 600px;
   height: 375px;
+  display: flex;
+
+  text-align: right;
 }
 
 .product-slider__controls {
@@ -101,4 +105,6 @@
   width: 128px;
   height: 80px;
   display: table;
+
+  background-color: $secondary-background-color;
 }

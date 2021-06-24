@@ -9,6 +9,14 @@ import PropTypes from 'prop-types';
  * @property {string} comment
  */
 
+const localReviewShape = PropTypes.shape({
+  rating: PropTypes.number.isRequired,
+  author: PropTypes.string.isRequired,
+  advantages: PropTypes.string.isRequired,
+  disadvantages: PropTypes.string.isRequired,
+  comment: PropTypes.string.isRequired,
+});
+
 const reviewShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
   productId: PropTypes.string.isRequired,
@@ -23,6 +31,7 @@ const reviewShape = PropTypes.shape({
 const reviewsType = PropTypes.arrayOf(reviewShape.isRequired).isRequired;
 
 export {
+  localReviewShape,
   reviewShape,
   reviewsType,
 };

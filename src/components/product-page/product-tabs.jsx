@@ -1,58 +1,20 @@
-import React, {useCallback} from 'react';
-import {NavLink, Switch, generatePath, Route, useHistory, matchPath} from 'react-router-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {NavLink, Switch, generatePath, Route} from 'react-router-dom';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
 
-import {ProductTabSpecifications} from './product-tab-specifications';
-import {ProductTabContacts} from './product-tab-contacts';
-import {ProductTabReviews} from './product-tab-reviews';
-import {useKeyDownStack} from '../../hooks/use-keydown-stack';
+import {ProductTabSpecifications} from '../product-tab-specifications/product-tab-specifications';
+import {ProductTabContacts} from '../product-tab-contacts/product-tab-contacts';
+import {ProductTabReviewsWithReviewForm as ProductTabReviews} from '../product-tab-reviews/product-tab-reviews';
+import {withActiveTab} from '../../hocs/with-active-tab';
 
-const TABS = [
-  {
-    key: `specifications`,
-    path: LocalPath.PRODUCT_SPECIFICATIONS,
-    title: `Характеристики`,
-  },
-  {
-    key: `reviews`,
-    path: LocalPath.PRODUCT_REVIEWS,
-    title: `Отзывы`,
-  },
-  {
-    key: `contacts`,
-    path: LocalPath.PRODUCT_CONTACTS,
-    title: `Контакты`,
-  },
-];
-
-const ProductTabs = ({product}) => {
-  const history = useHistory();
-
-  const onDocumentKeyDown = useCallback((evt) => {
-    if (evt.key === `Tab`) {
-      evt.preventDefault();
-      evt.stopPropagation();
-
-      const activeTabIndex = TABS.findIndex((tab) => matchPath(history.location.pathname, {
-        path: tab.path,
-        exact: true,
-      }));
-
-      const nextTabOffset = activeTabIndex + (evt.shiftKey ? (TABS.length - 1) : 1);
-      const nextTab = TABS[nextTabOffset % TABS.length];
-
-      history.push(generatePath(nextTab.path, product));
-    }
-  }, [product, history]);
-
-  useKeyDownStack(onDocumentKeyDown);
-
+const ProductTabs = ({product, tabs}) => {
   return (
     <div className="product-tabs">
       <ul className="product-tabs__controls">
-        {TABS.map((tab) => (
+        {tabs.map((tab) => (
           <li key={tab.key}>
             <NavLink
               exact to={generatePath(tab.path, product)}
@@ -80,6 +42,13 @@ const ProductTabs = ({product}) => {
 
 ProductTabs.propTypes = {
   product: productShape.isRequired,
+  tabs: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
-export {ProductTabs};
+const ProductTabsWithActiveTab = withActiveTab(ProductTabs);
+
+export {ProductTabs, ProductTabsWithActiveTab};

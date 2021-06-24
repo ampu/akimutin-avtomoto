@@ -6,3 +6,11 @@
   padding-left: $container-side-padding-desktop;
   padding-right: $container-side-padding-desktop;
 }
+
+@mixin outline() {
+  box-shadow: 0 0 0 2px $primary-outline-color, 0 0 0 3px $secondary-outline-color;
+}
+
+@mixin outline-alternative() {
+  box-shadow: 0 0 0 2px $secondary-outline-color, 0 0 0 3px $primary-outline-color;
+}
