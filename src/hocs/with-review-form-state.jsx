@@ -2,6 +2,8 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import {DEFAULT_LOCAL_REVIEW} from '../constants/constants';
+import {MouseButton} from '../constants/mouse-button';
+import {KeyboardKey} from '../constants/keyboard-key';
 import {localReviewStorage} from '../helpers/local-review-storage';
 import {useMountedRef} from '../hooks/use-mounted-ref';
 import {useKeyDownStack} from '../hooks/use-keydown-stack';
@@ -46,7 +48,7 @@ export const withReviewFormState = (Component) => {
     }, []);
 
     const onContainerMouseDown = (evt) => {
-      if (evt.target === evt.currentTarget) {
+      if (evt.button === MouseButton.LEFT && evt.target === evt.currentTarget) {
         onClose();
       }
     };
@@ -56,7 +58,7 @@ export const withReviewFormState = (Component) => {
     };
 
     const onDocumentKeyDown = useCallback((evt) => {
-      if (evt.key === `Escape`) {
+      if (evt.key === KeyboardKey.ESCAPE) {
         evt.preventDefault();
         evt.stopPropagation();
 

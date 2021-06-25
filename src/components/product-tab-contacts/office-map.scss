@@ -1,7 +1,9 @@
-.office-map__map {
+.office-map {
   position: relative;
   width: 431px;
   height: 271px;
+
+  background-color: $secondary-background-color;
 }
 
 .office-map__map-image {
@@ -13,7 +15,7 @@
   height: 271px;
 }
 
-.office-map__map-pin {
+.office-map__pin-image {
   position: absolute;
   z-index: -1;
   left: 114px;

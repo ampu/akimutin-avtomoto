@@ -4,7 +4,9 @@ import {OfficeMap} from './office-map';
 
 const ProductTabContacts = () => {
   return (
-    <div className="product-tab-contacts">
+    <section className="product-tab-contacts">
+      <h2 className="visually-hidden">Контакты</h2>
+
       <dl className="product-tab-contacts__list">
         <dt className="product-tab-contacts__list-item-key">
           Адрес
@@ -37,7 +39,7 @@ const ProductTabContacts = () => {
       </dl>
 
       <OfficeMap/>
-    </div>
+    </section>
   );
 };
 

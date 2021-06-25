@@ -1,14 +1,14 @@
 import React, {useCallback, useState} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-import {postReview} from '../helpers/review-helpers';
 import {productShape} from '../types/product-types';
-
-import {REVIEW_MOCKS} from '../mocks/review-mocks';
+import {reviewsType} from '../types/review-types';
+import {selectReviews} from '../store/reviews/reviews-selectors';
+import {addLocalReview} from '../store/reviews/reviews-operations';
 
 export const withReviewForm = (Component) => {
-  const WithReviewForm = ({product, ...props}) => {
-    const [reviews, setReviews] = useState(REVIEW_MOCKS);
-
+  const WithReviewForm = ({product, reviews, onAddReview, ...props}) => {
     const [hasReviewForm, toggleReviewForm] = useState(false);
 
     const onWriteReviewLinkClick = useCallback((evt) => {
@@ -24,10 +24,8 @@ export const withReviewForm = (Component) => {
     const onReviewFormSubmit = useCallback((localReview) => {
       toggleReviewForm(false);
 
-      const review = postReview(product.id, localReview);
-
-      setReviews((oldReviews) => [review].concat(oldReviews));
-    }, [product.id]);
+      onAddReview(product.id, localReview);
+    }, [onAddReview, product.id]);
 
     return (
       <Component
@@ -44,9 +42,21 @@ export const withReviewForm = (Component) => {
 
   WithReviewForm.propTypes = {
     product: productShape.isRequired,
+    reviews: reviewsType,
+    onAddReview: PropTypes.func.isRequired,
   };
+
+  const mapStateToProps = (state) => ({
+    reviews: selectReviews(state),
+  });
+
+  const mapDispatchToProps = (dispatch) => ({
+    onAddReview(productId, localReview) {
+      dispatch(addLocalReview(productId, localReview));
+    },
+  });
 
   WithReviewForm.displayName = `${Component.name}${WithReviewForm.name}`;
 
-  return WithReviewForm;
+  return connect(mapStateToProps, mapDispatchToProps)(WithReviewForm);
 };

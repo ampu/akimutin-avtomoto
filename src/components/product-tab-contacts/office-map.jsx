@@ -30,9 +30,9 @@ const PLACEMARK_PROPS = {
 
 const OfficeMap = () => {
   return (
-    <div className="office-map__map">
+    <div className="office-map">
       <img className="office-map__map-image" src={mapImage} width="431" height="271" alt="Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"/>
-      <img className="office-map__map-pin" src={mapPinImage} width="32" height="40" alt="Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"/>
+      <img className="office-map__pin-image" src={mapPinImage} width="32" height="40" alt="Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"/>
 
       <YMaps>
         <Map {...MAP_PROPS}>

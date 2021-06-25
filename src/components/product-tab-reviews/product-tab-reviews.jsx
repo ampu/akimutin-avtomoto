@@ -21,7 +21,9 @@ const ProductTabReviews = ({
   const isEmpty = reviews.length === 0;
 
   return (
-    <div className="product-tab-reviews">
+    <section className="product-tab-reviews">
+      <h2 className="visually-hidden">Отзывы</h2>
+
       <Link
         to={generatePath(LocalPath.PRODUCT_REVIEW_WRITE, product)}
         className="product-tab-reviews__write-review-link"
@@ -49,7 +51,7 @@ const ProductTabReviews = ({
           ))}
         </ul>
       )}
-    </div>
+    </section>
   );
 };
 

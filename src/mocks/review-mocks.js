@@ -6,7 +6,6 @@ export const REVIEW_MOCKS = [
   {
     id: `1`,
     productId: `1`,
-    isRecommended: true,
     rating: 5,
     author: `Борис Иванов`,
     advantages: `мощность, внешний вид`,
@@ -17,7 +16,6 @@ export const REVIEW_MOCKS = [
   {
     id: `2`,
     productId: `1`,
-    isRecommended: true,
     rating: 3,
     author: `Марсель Исмагилов`,
     advantages: `Cтиль, комфорт, управляемость`,

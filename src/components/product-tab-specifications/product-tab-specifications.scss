@@ -1,7 +1,10 @@
 .product-tab-specifications {
+  width: 565px;
+}
+
+.product-tab-specifications__list {
   margin: 0;
   padding: 0;
-  width: 565px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 

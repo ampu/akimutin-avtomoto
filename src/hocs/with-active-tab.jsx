@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import {generatePath, matchPath, useHistory} from 'react-router-dom';
 
 import {LocalPath} from '../constants/local-path';
+import {KeyboardKey} from '../constants/keyboard-key';
 import {productShape} from '../types/product-types';
 import {useKeyDownStack} from '../hooks/use-keydown-stack';
 
@@ -28,7 +29,7 @@ export const withActiveTab = (Component) => {
     const history = useHistory();
 
     const onDocumentKeyDown = useCallback((evt) => {
-      if (evt.key === `Tab`) {
+      if (evt.key === KeyboardKey.TAB) {
         evt.preventDefault();
         evt.stopPropagation();
 
