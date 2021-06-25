@@ -52,7 +52,8 @@
     "react-scripts": "4.0.3",
     "react-yandex-maps": "4.6.0",
     "redux": "4.1.0",
-    "redux-devtools-extension": "2.13.9"
+    "redux-devtools-extension": "2.13.9",
+    "redux-thunk": "2.3.0"
   },
   "devDependencies": {
     "@htmlacademy/editorconfig-cli": "1.0.0",

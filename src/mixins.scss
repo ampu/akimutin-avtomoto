@@ -1,6 +1,6 @@
 @mixin container() {
   box-sizing: border-box;
-  min-width: 1024px;
+  min-width: 1024px - $scroll-width;
   max-width: 1176px + 2 * $container-side-padding-desktop;
   margin: 0 auto;
   padding-left: $container-side-padding-desktop;
