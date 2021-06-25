@@ -37,10 +37,6 @@
   }
 }
 
-.product-slider__active-image-link {
-  display: flex;
-}
-
 .product-slider__active-image {
   width: 600px;
   height: 375px;
@@ -107,4 +103,8 @@
   display: table;
 
   background-color: $secondary-background-color;
+
+  &.active {
+    @include outline();
+  }
 }

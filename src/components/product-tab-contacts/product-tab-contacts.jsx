@@ -27,14 +27,14 @@ const ProductTabContacts = () => {
           Телефон
         </dt>
         <dd className="product-tab-contacts__list-item-value">
-          8 (800) 333-55-99
+          <a href="tel:+78003335599">8 (800) 333-55-99</a>
         </dd>
 
         <dt className="product-tab-contacts__list-item-key">
           E-mail
         </dt>
         <dd className="product-tab-contacts__list-item-value">
-          info@avto-moto.ru
+          <a href="mailto:info@avto-moto.ru">info@avto-moto.ru</a>
         </dd>
       </dl>
 

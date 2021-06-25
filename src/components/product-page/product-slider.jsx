@@ -10,6 +10,7 @@ const ProductSlider = ({
   activeImageIndex,
   isBackArrowEnabled, onBackArrowClick,
   isNextArrowEnabled, onNextArrowClick,
+  onActiveImageTouchStart, onActiveImageTouchMove, onActiveImageTouchEnd,
 }) => {
   const activeImageContainerClassName = getClassName({
     [`product-slider__active-image-container`]: true,
@@ -29,14 +30,16 @@ const ProductSlider = ({
   return (
     <div className="product-slider">
       <figure className={activeImageContainerClassName}>
-        <a className="product-slider__active-image-link" href={product.images[activeImageIndex]}>
-          <img
-            className="product-slider__active-image"
-            src={product.images[activeImageIndex]}
-            alt={`Изображение «${product.title}» №${activeImageIndex + 1}`}
-            width="600" height="375"
-          />
-        </a>
+        <img
+          className="product-slider__active-image"
+          src={product.images[activeImageIndex]}
+          alt={`Изображение «${product.title}» №${activeImageIndex + 1}`}
+          width="600" height="375"
+          onTouchStart={onActiveImageTouchStart}
+          onTouchMove={onActiveImageTouchMove}
+          onTouchEnd={onActiveImageTouchEnd}
+          draggable={false}
+        />
       </figure>
 
       <div className="product-slider__controls">
@@ -63,16 +66,22 @@ const ProductSlider = ({
         </button>
 
         <ul className="product-slider__thumbnails">
-          {product.thumbnails.map((thumbnail, thumbnailIndex) => (
-            <li key={thumbnail} className="product-slider__thumbnails-item">
-              <img
-                className="product-slider__thumbnail-image"
-                src={thumbnail}
-                alt={`Превью «${product.title}» №${thumbnailIndex + 1}`}
-                width="128" height="80"
-              />
-            </li>
-          ))}
+          {product.thumbnails.map((thumbnail, thumbnailIndex) => {
+            const imageClassName = getClassName({
+              [`product-slider__thumbnail-image`]: true,
+              [`active`]: activeImageIndex === thumbnailIndex,
+            });
+            return (
+              <li key={thumbnail} className="product-slider__thumbnails-item">
+                <img
+                  className={imageClassName}
+                  src={thumbnail}
+                  alt={`Превью «${product.title}» №${thumbnailIndex + 1}`}
+                  width="128" height="80"
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
@@ -86,6 +95,9 @@ ProductSlider.propTypes = {
   onBackArrowClick: PropTypes.func.isRequired,
   isNextArrowEnabled: PropTypes.bool.isRequired,
   onNextArrowClick: PropTypes.func.isRequired,
+  onActiveImageTouchStart: PropTypes.func.isRequired,
+  onActiveImageTouchMove: PropTypes.func.isRequired,
+  onActiveImageTouchEnd: PropTypes.func.isRequired,
 };
 
 const ProductSliderWithActiveImage = withActiveImage(ProductSlider);

@@ -35,3 +35,18 @@
 
   color: $contacts-item-value-color;
 }
+
+.product-tab-contacts__list-item-value a {
+  font: inherit;
+  text-decoration: none;
+
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+}

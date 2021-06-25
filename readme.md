@@ -2,6 +2,7 @@
 
 * [Канал Slack](https://app.slack.com/client/T8KRLEN22/C0252L8QHU7)
 * [Карточка проекта](https://docs.google.com/spreadsheets/d/1BANoFHxmTtUQi0mbmaKGA5z-zyruBo1HhWZFc-DpkEQ/edit#gid=88910524)
+* [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
 
 ## Available Scripts
 
