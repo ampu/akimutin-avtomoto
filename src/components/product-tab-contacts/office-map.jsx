@@ -1,7 +1,8 @@
 import React from 'react';
 import {Map, Placemark, YMaps} from 'react-yandex-maps';
 
-import mapImage from '../../images/map.png';
+import mapJpeg from '../../images/map.jpg';
+import mapWebp from '../../images/map.webp';
 import mapPinImage from '../../images/map-pin.svg';
 
 const MAP_PROPS = {
@@ -31,13 +32,19 @@ const PLACEMARK_PROPS = {
 const OfficeMap = () => {
   return (
     <div className="office-map">
-      <img
-        className="office-map__map-image"
-        src={mapImage}
-        width="431"
-        height="271"
-        alt="Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"
-      />
+      <picture>
+        <source
+          type="image/webp"
+          srcSet={mapWebp}
+        />
+        <img
+          className="office-map__map-image"
+          src={mapJpeg}
+          width="431"
+          height="271"
+          alt="Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"
+        />
+      </picture>
 
       <img
         className="office-map__pin-image"
