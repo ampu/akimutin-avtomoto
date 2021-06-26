@@ -14,24 +14,13 @@ const ProductSlider = ({
 }) => {
   const activeImageContainerClassName = getClassName({
     [`product-slider__active-image-container`]: true,
-    [`product-slider__active-image-container--new-model`]: true,
-  });
-
-  const backArrowClassName = getClassName({
-    [`product-slider__arrow-button`]: true,
-    [`product-slider__arrow-button--back`]: true,
-  });
-
-  const nextArrowPathClassName = getClassName({
-    [`product-slider__arrow-button`]: true,
-    [`product-slider__arrow-button--next`]: true,
+    [`product-slider__active-image-container--new-model`]: product.isNewModel,
   });
 
   return (
     <div className="product-slider">
       <figure className={activeImageContainerClassName}>
         <img
-          className="product-slider__active-image"
           src={product.images[activeImageIndex]}
           alt={`Изображение «${product.title}» №${activeImageIndex + 1}`}
           width="600" height="375"
@@ -43,8 +32,9 @@ const ProductSlider = ({
       </figure>
 
       <div className="product-slider__controls">
-        <button type="button"
-          className={backArrowClassName}
+        <button
+          type="button"
+          className="product-slider__arrow-button product-slider__arrow-button--back"
           aria-label={`Выбрать предыдущее изображение ${product.title}`}
           onClick={onBackArrowClick}
           disabled={!isBackArrowEnabled}
@@ -54,8 +44,9 @@ const ProductSlider = ({
           </svg>
         </button>
 
-        <button type="button"
-          className={nextArrowPathClassName}
+        <button
+          type="button"
+          className="product-slider__arrow-button product-slider__arrow-button--next"
           aria-label={`Выбрать следующее изображение ${product.title}`}
           onClick={onNextArrowClick}
           disabled={!isNextArrowEnabled}
@@ -68,11 +59,10 @@ const ProductSlider = ({
         <ul className="product-slider__thumbnails">
           {product.thumbnails.map((thumbnail, thumbnailIndex) => {
             const imageClassName = getClassName({
-              [`product-slider__thumbnail-image`]: true,
               [`active`]: activeImageIndex === thumbnailIndex,
             });
             return (
-              <li key={thumbnail} className="product-slider__thumbnails-item">
+              <li key={thumbnail}>
                 <img
                   className={imageClassName}
                   src={thumbnail}

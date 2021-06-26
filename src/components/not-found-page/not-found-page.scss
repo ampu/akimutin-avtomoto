@@ -1,0 +1,16 @@
+.not-found-page {
+  @include container();
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-found-page h1 {
+  @include page-title();
+}
+
+.not-found-page a {
+  @include navigation-link();
+}

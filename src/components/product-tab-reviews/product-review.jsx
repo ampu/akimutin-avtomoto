@@ -31,7 +31,8 @@ const ProductReview = ({review}) => {
 
         {review.disadvantages && <>
           <dt className="product-review__text-key product-review__text-key--disadvantages">Недостатки</dt>
-          <dd className="product-review__text-value product-review__text-value--disadvantages">{review.disadvantages}</dd>
+          <dd
+            className="product-review__text-value product-review__text-value--disadvantages">{review.disadvantages}</dd>
         </>}
 
         <dt className="product-review__text-key">Комментарий</dt>

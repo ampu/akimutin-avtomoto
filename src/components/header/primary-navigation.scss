@@ -6,6 +6,10 @@
   flex-flow: wrap;
 }
 
-.primary-navigation__item {
+.primary-navigation li {
   margin-left: 68px;
+}
+
+.primary-navigation a {
+  @include navigation-link();
 }

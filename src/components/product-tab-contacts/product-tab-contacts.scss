@@ -4,7 +4,7 @@
   grid-column-gap: 74px;
 }
 
-.product-tab-contacts__list {
+.product-tab-contacts dl {
   margin: 0;
   padding: 0;
   display: flex;
@@ -13,7 +13,7 @@
   margin-top: -5px;
 }
 
-.product-tab-contacts__list-item-key {
+.product-tab-contacts dt {
   margin-bottom: 10px;
 
   font-style: normal;
@@ -24,7 +24,7 @@
   color: $contacts-item-key-color;
 }
 
-.product-tab-contacts__list-item-value {
+.product-tab-contacts dd {
   margin: 0;
   margin-bottom: 24px;
 
@@ -36,7 +36,7 @@
   color: $contacts-item-value-color;
 }
 
-.product-tab-contacts__list-item-value a {
+.product-tab-contacts a {
   font: inherit;
   text-decoration: none;
 

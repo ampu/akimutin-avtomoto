@@ -31,6 +31,7 @@ const ProductTabReviews = ({
       >
         Оставить отзыв
       </Link>
+
       {hasReviewForm && (
         <ProductReviewForm
           product={product}
@@ -40,7 +41,9 @@ const ProductTabReviews = ({
       )}
 
       {isEmpty && (
-        <p className="product-tab-reviews__empty">Никто ещё не оставил отзыв на «{product.title}».</p>
+        <p className="product-tab-reviews__empty">
+          Никто ещё не оставил отзыв на «{product.title}».
+        </p>
       )}
       {!isEmpty && (
         <ul className="product-tab-reviews__list">

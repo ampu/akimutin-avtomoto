@@ -9,7 +9,7 @@ import {addSpecialMillionSeparator, formatMoney} from '../../helpers/product-hel
 const ProductInformation = ({product}) => {
   return (
     <section className="product-information">
-      <h1 className="product-information__title page-title">Марпех 11</h1>
+      <h1>Марпех 11</h1>
 
       <ul className="product-information__features">
         {product.features.map((feature) => {
@@ -24,8 +24,8 @@ const ProductInformation = ({product}) => {
       </ul>
 
       <p className="product-information__prices">
-        <span className="product-information__price">{formatMoney(product.price)}&nbsp;₽</span>
-        <span className="product-information__old-price">{addSpecialMillionSeparator(formatMoney(product.oldPrice))}&nbsp;₽</span>
+        <strong>{formatMoney(product.price)}&nbsp;₽</strong>
+        <span>{addSpecialMillionSeparator(formatMoney(product.oldPrice))}&nbsp;₽</span>
       </p>
 
       <Link className="product-information__buy-car-button" to={LocalPath.BUY_CAR}>

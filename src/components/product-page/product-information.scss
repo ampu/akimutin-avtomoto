@@ -5,7 +5,9 @@
   align-items: flex-start;
 }
 
-.product-information__title {
+.product-information h1 {
+  @include page-title();
+
   margin-bottom: 21px;
   margin-left: 3px;
 }
@@ -88,7 +90,7 @@
   margin-left: 3px;
 }
 
-.product-information__price {
+.product-information__prices strong {
   display: flex;
   margin-right: 36px;
 
@@ -99,7 +101,7 @@
   white-space: pre;
 }
 
-.product-information__old-price {
+.product-information__prices span {
   position: relative;
   display: flex;
 

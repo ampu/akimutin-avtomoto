@@ -2,7 +2,7 @@
   width: 565px;
 }
 
-.product-tab-specifications__list {
+.product-tab-specifications dl {
   margin: 0;
   padding: 0;
   display: grid;
@@ -16,7 +16,7 @@
   color: $primary-text-color;
 }
 
-.product-tab-specifications__key {
+.product-tab-specifications dt {
   padding-top: 19px;
   padding-bottom: 8px;
   padding-right: 20px;
@@ -28,7 +28,7 @@
   }
 }
 
-.product-tab-specifications__value {
+.product-tab-specifications dd {
   margin: 0;
   padding-left: 20px;
   padding-top: 19px;

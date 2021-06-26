@@ -5,6 +5,11 @@ import mapJpeg from '../../images/map.jpg';
 import mapWebp from '../../images/map.webp';
 import mapPinImage from '../../images/map-pin.svg';
 
+const Description = {
+  MAP: `Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5`,
+  PIN: `Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5`,
+};
+
 const MAP_PROPS = {
   state: {
     center: [59.967137, 30.323272],
@@ -18,8 +23,8 @@ const PLACEMARK_PROPS = {
   geometry: [59.968137, 30.316272],
   modules: [`geoObject.addon.balloon`, `geoObject.addon.hint`],
   properties: {
-    hintContent: `Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5`,
-    balloonContent: `Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5`,
+    hintContent: Description.PIN,
+    balloonContent: Description.PIN,
   },
   options: {
     iconLayout: `default#image`,
@@ -33,16 +38,13 @@ const OfficeMap = () => {
   return (
     <div className="office-map">
       <picture>
-        <source
-          type="image/webp"
-          srcSet={mapWebp}
-        />
+        <source type="image/webp" srcSet={mapWebp}/>
         <img
           className="office-map__map-image"
           src={mapJpeg}
           width="431"
           height="271"
-          alt="Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"
+          alt={Description.MAP}
         />
       </picture>
 
@@ -51,7 +53,7 @@ const OfficeMap = () => {
         src={mapPinImage}
         width="32"
         height="40"
-        alt="Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5"
+        alt={Description.PIN}
       />
 
       <YMaps>

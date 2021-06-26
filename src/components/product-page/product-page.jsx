@@ -13,9 +13,9 @@ import {PRODUCT_MOCK} from '../../mocks/product-mock';
 const ProductPage = ({product = PRODUCT_MOCK}) => {
   return <>
     <Header/>
-    <main className="page-main page-main--product">
-      <ProductSlider product={product}/>
+    <main className="product-page">
       <ProductInformation product={product}/>
+      <ProductSlider product={product}/>
       <ProductTabs product={product}/>
     </main>
     <Footer/>

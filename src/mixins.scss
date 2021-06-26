@@ -1,4 +1,5 @@
 @mixin container() {
+  width: 100%;
   box-sizing: border-box;
   min-width: 1024px - $scroll-width;
   max-width: 1176px + 2 * $container-side-padding-desktop;
@@ -7,10 +8,42 @@
   padding-right: $container-side-padding-desktop;
 }
 
-@mixin outline() {
-  box-shadow: 0 0 0 2px $interactive-alternate-color, 0 0 0 3px $secondary-outline-color;
+@mixin page-title {
+  margin: 0;
+  margin-bottom: 21px;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 41px;
+
+  color: $primary-text-color;
 }
 
-@mixin outline-alternative() {
-  box-shadow: 0 0 0 1px $secondary-outline-color, 0 0 0 3px $interactive-alternate-color;
+@mixin navigation-link() {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+
+  color: $primary-text-color;
+
+  &:hover {
+    text-decoration: underline;
+
+    &.active {
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+
+  &:active,
+  &.active {
+    color: $interactive-alternate-color;
+  }
+}
+
+@mixin outline() {
+  box-shadow: 0 0 0 2px $interactive-alternate-color, 0 0 0 3px $secondary-outline-color;
 }

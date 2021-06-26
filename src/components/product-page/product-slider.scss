@@ -1,4 +1,5 @@
 .product-slider {
+  order: -1;
   padding-top: 90px;
   display: flex;
   flex-flow: column;
@@ -37,7 +38,7 @@
   }
 }
 
-.product-slider__active-image {
+.product-slider__active-image-container img {
   width: 600px;
   height: 375px;
   display: flex;
@@ -96,7 +97,7 @@
   margin-right: -25px;
 }
 
-.product-slider__thumbnail-image {
+.product-slider__thumbnails img {
   margin-right: 25px;
   width: 128px;
   height: 80px;

@@ -16,10 +16,7 @@ const ProductTabs = ({product, tabs}) => {
       <ul className="product-tabs__controls">
         {tabs.map((tab) => (
           <li key={tab.key}>
-            <NavLink
-              exact to={generatePath(tab.path, product)}
-              className="product-tabs__control"
-            >
+            <NavLink exact to={generatePath(tab.path, product)}>
               {tab.title}
             </NavLink>
           </li>

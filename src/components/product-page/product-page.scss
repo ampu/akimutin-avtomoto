@@ -1,0 +1,10 @@
+.product-page {
+  @include container();
+
+  display: grid;
+  align-content: start;
+  grid-template-columns: 600px 1fr;
+  grid-column-gap: 55px;
+  grid-row-gap: 90px;
+  margin-bottom: 140px;
+}
