@@ -13,14 +13,15 @@ const RATING_TO_STAR_NOUN = {
   default: `звёзд`,
 };
 
-const RECOMMENDED_RATING_THRESHOLD = 3;
+const RECOMMENDATION_RATING_THRESHOLD = 3;
 
 /**
  * @param {string} datetime
  * @return {string}
  */
 const humanizeAsDurationFromNow = (datetime) => {
-  return dayjs.duration(dayjs(datetime).diff(dayjs()))
+  return dayjs.duration(dayjs(datetime)
+    .diff(dayjs()))
     .humanize(true)
     .replace(/^([а-я]+ назад)$/, `1 $1`);
 };
@@ -34,7 +35,7 @@ const formatStars = (rating) => {
 };
 
 const humanizeRating = (rating) => {
-  return rating >= RECOMMENDED_RATING_THRESHOLD ? `Советует` : `Не рекомендует`;
+  return rating >= RECOMMENDATION_RATING_THRESHOLD ? `Советует` : `Не рекомендует`;
 };
 
 const postReview = (productId, localReview) => {

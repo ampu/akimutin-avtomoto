@@ -1,3 +1,7 @@
+/**
+ * @param {number} timeout
+ * @return {{schedule: Function}}
+ */
 const createThrottlingHelper = (timeout) => {
   const state = {
     callback: null,
