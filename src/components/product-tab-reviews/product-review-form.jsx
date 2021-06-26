@@ -82,15 +82,6 @@ const ProductReviewForm = ({
             <fieldset>
               <legend>Оцените товар:</legend>
 
-              <input
-                type="radio"
-                className="visually-hidden"
-                name="rating"
-                value="0"
-                checked={localReview.rating === 0}
-                onChange={onRatingInputChange}
-              />
-
               {range(RATING_CONSTRAINT.min, RATING_CONSTRAINT.max + 1).map((value) => {
                 const ratingId = `product-review-form-rating-${value}`;
 

@@ -3,6 +3,8 @@
   display: flex;
   flex-flow: column;
   align-items: flex-start;
+
+  overflow: hidden;
 }
 
 .product-information h1 {
@@ -121,7 +123,7 @@
     left: -3px;
     top: -2px;
     width: calc(100% + 12px);
-    height: calc(100% + 2px);
+    height: (27px + 2px);
 
     background: transparent url("data:image/svg+xml,%3Csvg width='125' height='13' viewBox='0 0 125 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 12.5L124 1' stroke='%2348494d'/%3E%3C/svg%3E") center center / 100% 100%;
   }
