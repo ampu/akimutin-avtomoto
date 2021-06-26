@@ -48,11 +48,12 @@
   z-index: 1;
   right: 20px;
   top: 20px;
-  padding: 0;
+  box-sizing: content-box;
+  padding: 5px;
   margin: 0;
   display: flex;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
 
   cursor: pointer;
   background: transparent url("data:image/svg+xml,%3Csvg width='15' height='16' viewBox='0 0 15 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.6399 15.0096L7.50482 8.86495L1.36977 15.0096L0 13.6399L6.14469 7.50482L0 1.36978L1.36977 0L7.50482 6.14469L13.6399 0.00964652L15 1.36978L8.86495 7.50482L15 13.6399L13.6399 15.0096Z' fill='%239f9e9e'/%3E%3C/svg%3E%0A") no-repeat center center / 15px 15px;
