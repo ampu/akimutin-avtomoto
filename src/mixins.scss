@@ -1,14 +1,14 @@
 @mixin container() {
-  width: 100%;
   box-sizing: border-box;
   min-width: 1024px - $scroll-width;
   max-width: 1176px + 2 * $container-side-padding-desktop;
+  width: 100%;
   margin: 0 auto;
   padding-left: $container-side-padding-desktop;
   padding-right: $container-side-padding-desktop;
 }
 
-@mixin page-title {
+@mixin page-title() {
   margin: 0;
   margin-bottom: 21px;
 

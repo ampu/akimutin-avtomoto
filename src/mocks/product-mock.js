@@ -1,3 +1,11 @@
+import thumbnailImage1 from '../images/slider-small-1.jpg';
+import thumbnailImage2 from '../images/slider-small-2.jpg';
+import thumbnailImage3 from '../images/slider-small-3.jpg';
+
+import image1 from '../images/slider-big-1.jpg';
+import image2 from '../images/slider-big-2.jpg';
+import image3 from '../images/slider-big-3.jpg';
+
 export const PRODUCT_MOCK = {
   id: `1`,
   isNewModel: true,
@@ -5,16 +13,8 @@ export const PRODUCT_MOCK = {
   price: 2300000,
   oldPrice: 2400000,
   creditPrice: 11000,
-  thumbnails: [
-    `/akimutin_avtomoto/products/slider-small-1.jpg`,
-    `/akimutin_avtomoto/products/slider-small-2.jpg`,
-    `/akimutin_avtomoto/products/slider-small-3.jpg`,
-  ],
-  images: [
-    `/akimutin_avtomoto/products/slider-big-1.jpg`,
-    `/akimutin_avtomoto/products/slider-big-2.jpg`,
-    `/akimutin_avtomoto/products/slider-big-3.jpg`,
-  ],
+  thumbnails: [thumbnailImage1, thumbnailImage2, thumbnailImage3],
+  images: [image1, image2, image3],
   features: [
     {key: `engine-type-gasoline`, value: `бензин`},
     {key: `transmission-manual`, value: `механика`},

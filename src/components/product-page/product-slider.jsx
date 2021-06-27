@@ -31,49 +31,55 @@ const ProductSlider = ({
         />
       </figure>
 
-      <div className="product-slider__controls">
-        <button
-          type="button"
-          className="product-slider__arrow-button product-slider__arrow-button--back"
-          aria-label={`Выбрать предыдущее изображение ${product.title}`}
-          onClick={onBackArrowClick}
-          disabled={!isBackArrowEnabled}
-        >
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.0043 26.1719L22.9184 20.3686M17.0043 26.1719L22.6929 31.9692M17.0043 26.1719L35.9813 26.3513"/>
-          </svg>
-        </button>
+      {product.thumbnails.length > 0 && (
+        <div className="product-slider__controls">
+          <button
+            type="button"
+            className="product-slider__arrow-button product-slider__arrow-button--back"
+            aria-label={`Выбрать предыдущее изображение ${product.title}`}
+            onClick={onBackArrowClick}
+            disabled={!isBackArrowEnabled}
+          >
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M17.0043 26.1719L22.9184 20.3686M17.0043 26.1719L22.6929 31.9692M17.0043 26.1719L35.9813 26.3513"
+              />
+            </svg>
+          </button>
 
-        <button
-          type="button"
-          className="product-slider__arrow-button product-slider__arrow-button--next"
-          aria-label={`Выбрать следующее изображение ${product.title}`}
-          onClick={onNextArrowClick}
-          disabled={!isNextArrowEnabled}
-        >
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M34.9873 26.1719L29.0747 20.3686M34.9873 26.1719L29.3001 31.9692M34.9873 26.1719L16.0151 26.3513"/>
-          </svg>
-        </button>
+          <button
+            type="button"
+            className="product-slider__arrow-button product-slider__arrow-button--next"
+            aria-label={`Выбрать следующее изображение ${product.title}`}
+            onClick={onNextArrowClick}
+            disabled={!isNextArrowEnabled}
+          >
+            <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M34.9873 26.1719L29.0747 20.3686M34.9873 26.1719L29.3001 31.9692M34.9873 26.1719L16.0151 26.3513"
+              />
+            </svg>
+          </button>
 
-        <ul className="product-slider__thumbnails">
-          {product.thumbnails.map((thumbnail, thumbnailIndex) => {
-            const imageClassName = getClassName({
-              [`active`]: activeImageIndex === thumbnailIndex,
-            });
-            return (
-              <li key={thumbnail}>
-                <img
-                  className={imageClassName}
-                  src={thumbnail}
-                  alt={`Превью «${product.title}» №${thumbnailIndex + 1}`}
-                  width="128" height="80"
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+          <ul className="product-slider__thumbnails">
+            {product.thumbnails.map((thumbnail, thumbnailIndex) => {
+              const imageClassName = getClassName({
+                [`active`]: activeImageIndex === thumbnailIndex,
+              });
+              return (
+                <li key={thumbnail}>
+                  <img
+                    className={imageClassName}
+                    src={thumbnail}
+                    alt={`Превью «${product.title}» №${thumbnailIndex + 1}`}
+                    width="128" height="80"
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
