@@ -1,7 +1,7 @@
 .secondary-navigation {
   list-style: none;
   margin: 0;
-  margin-right: -25px;
+  margin-left: -25px;
   padding: 0;
   display: flex;
   flex-flow: wrap;
@@ -9,7 +9,7 @@
 }
 
 .secondary-navigation li {
-  margin-right: 25px;
+  margin-left: 25px;
 }
 
 .secondary-navigation a {

@@ -92,7 +92,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-right: -25px;
+  margin-left: -25px;
   margin-bottom: -25px;
   width: ((128px + 25px) * 3);
   display: flex;
@@ -101,7 +101,7 @@
 }
 
 .product-slider__thumbnails img {
-  margin-right: 25px;
+  margin-left: 25px;
   margin-bottom: 25px;
   width: 128px;
   height: 80px;

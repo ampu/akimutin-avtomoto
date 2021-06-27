@@ -3,8 +3,6 @@
   display: flex;
   flex-flow: column;
   align-items: flex-start;
-
-  overflow: hidden;
 }
 
 .product-information h1 {
@@ -21,8 +19,7 @@
   display: flex;
   flex-flow: wrap;
   align-items: flex-start;
-  margin-left: 10px;
-  margin-right: -12px;
+  margin-left: (10px - 12px);
   margin-bottom: 22px;
 }
 
@@ -30,7 +27,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin-right: 12px;
+  margin-left: 12px;
 
   font-style: normal;
   font-weight: 400;
