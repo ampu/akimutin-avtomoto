@@ -5,21 +5,21 @@ import getClassName from 'classnames';
 import {LocalPath} from '../../constants/local-path';
 import PropTypes from 'prop-types';
 
+const PRIMARY_NAVIGATION_LINKS = [
+  {path: LocalPath.PRODUCTS, title: `Автомобили`},
+  {path: LocalPath.CONTACTS, title: `Контакты`},
+  {path: LocalPath.SERVICES, title: `Услуги`},
+  {path: LocalPath.VACANCIES, title: `Вакансии`},
+];
+
 const PrimaryNavigation = ({className}) => {
   return (
     <ul className={getClassName(`primary-navigation`, className)}>
-      <li>
-        <NavLink exact to={LocalPath.PRODUCTS}>Автомобили</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.CONTACTS}>Контакты</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.SERVICES}>Услуги</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.VACANCIES}>Вакансии</NavLink>
-      </li>
+      {PRIMARY_NAVIGATION_LINKS.map((link) => (
+        <li key={link.path}>
+          <NavLink exact to={link.path}>{link.title}</NavLink>
+        </li>
+      ))}
     </ul>
   );
 };

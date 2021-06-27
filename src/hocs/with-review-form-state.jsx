@@ -53,10 +53,6 @@ export const withReviewFormState = (Component) => {
       }
     };
 
-    const onCloseButtonClick = () => {
-      onClose();
-    };
-
     const onDocumentKeyDown = useCallback((evt) => {
       if (evt.key === KeyboardKey.ESCAPE) {
         evt.preventDefault();
@@ -167,7 +163,7 @@ export const withReviewFormState = (Component) => {
         hasBounceAnimation={hasBounceAnimation} isRejected={isRejected}
         authorError={authorError} commentError={commentError}
         onFormSubmit={onFormSubmit}
-        onCloseButtonClick={onCloseButtonClick} onContainerMouseDown={onContainerMouseDown}
+        onCloseButtonClick={onClose} onContainerMouseDown={onContainerMouseDown}
         authorInputRef={authorInputRef} commentInputRef={commentInputRef}
         onAuthorInputChange={onAuthorInputChange}
         onRatingInputChange={onRatingInputChange}

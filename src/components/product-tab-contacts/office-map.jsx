@@ -6,8 +6,8 @@ import mapWebp from '../../images/map.webp';
 import mapPinImage from '../../images/map-pin.svg';
 
 const Description = {
-  MAP: `Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5`,
-  PIN: `Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5`,
+  MAP: `Карта офиса Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5.`,
+  PIN: `Офис Avto Moto по адресу Санкт-Петербург, набережная реки Карповки, дом 5.`,
 };
 
 const MAP_PROPS = {

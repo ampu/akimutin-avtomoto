@@ -22,7 +22,7 @@ const ProductSlider = ({
       <figure className={activeImageContainerClassName}>
         <img
           src={product.images[activeImageIndex]}
-          alt={`Изображение «${product.title}» №${activeImageIndex + 1}`}
+          alt={`Изображение «${product.title}» №${activeImageIndex + 1}.`}
           width="600" height="375"
           onTouchStart={onActiveImageTouchStart}
           onTouchMove={onActiveImageTouchMove}
@@ -36,7 +36,7 @@ const ProductSlider = ({
           <button
             type="button"
             className="product-slider__arrow-button product-slider__arrow-button--back"
-            aria-label={`Выбрать предыдущее изображение ${product.title}`}
+            aria-label={`Выбрать предыдущее изображение ${product.title}.`}
             onClick={onBackArrowClick}
             disabled={!isBackArrowEnabled}
           >
@@ -50,7 +50,7 @@ const ProductSlider = ({
           <button
             type="button"
             className="product-slider__arrow-button product-slider__arrow-button--next"
-            aria-label={`Выбрать следующее изображение ${product.title}`}
+            aria-label={`Выбрать следующее изображение ${product.title}.`}
             onClick={onNextArrowClick}
             disabled={!isNextArrowEnabled}
           >
@@ -71,7 +71,7 @@ const ProductSlider = ({
                   <img
                     className={imageClassName}
                     src={thumbnail}
-                    alt={`Превью «${product.title}» №${thumbnailIndex + 1}`}
+                    alt={`Превью «${product.title}» №${thumbnailIndex + 1}.`}
                     width="128" height="80"
                   />
                 </li>

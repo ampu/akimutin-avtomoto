@@ -3,30 +3,24 @@ import {NavLink} from 'react-router-dom';
 
 import {LocalPath} from '../../constants/local-path';
 
+const SECONDARY_NAVIGATION_LINKS = [
+  {path: LocalPath.CORPORATE_CLIENTS, title: `Корпоративным клиентам`},
+  {path: LocalPath.CLIENTS, title: `Клиентам`},
+  {path: LocalPath.CAR_RENT, title: `Аренда авто`},
+  {path: LocalPath.CARSHARING, title: `Каршеринг`},
+  {path: LocalPath.SELLING_CAR, title: `Как продать авто`},
+  {path: LocalPath.TRADE_IN, title: `Trade-in`},
+  {path: LocalPath.TEST_DRIVE, title: `Test drive`},
+];
+
 const SecondaryNavigation = () => {
   return (
     <ul className="secondary-navigation">
-      <li>
-        <NavLink exact to={LocalPath.CORPORATE_CLIENTS}>Корпоративным клиентам</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.CLIENTS}>Клиентам</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.CAR_RENT}>Аренда авто</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.CARSHARING}>Каршеринг</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.SELLING_CAR}>Как продать авто</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.TRADE_IN}>Trade-in</NavLink>
-      </li>
-      <li>
-        <NavLink exact to={LocalPath.TEST_DRIVE}>Test drive</NavLink>
-      </li>
+      {SECONDARY_NAVIGATION_LINKS.map((link) => (
+        <li key={link.path}>
+          <NavLink exact to={link.path}>{link.title}</NavLink>
+        </li>
+      ))}
     </ul>
   );
 };

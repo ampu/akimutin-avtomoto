@@ -9,7 +9,7 @@ import logoImage from '../../images/logo.svg';
 const Logo = ({className}) => {
   return (
     <NavLink exact to={LocalPath.INDEX} className={getClassName(`logo`, className)}>
-      <img src={logoImage} alt="Логотип «Avto Moto»" width="134" height="55"/>
+      <img src={logoImage} alt="Логотип «Avto Moto»." width="134" height="55"/>
     </NavLink>
   );
 };
