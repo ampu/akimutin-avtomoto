@@ -8,9 +8,15 @@ import {withActiveImage} from '../../hocs/with-active-image';
 const ProductSlider = ({
   product,
   activeImageIndex,
-  isBackArrowEnabled, onBackArrowClick,
-  isNextArrowEnabled, onNextArrowClick,
-  onActiveImageTouchStart, onActiveImageTouchMove, onActiveImageTouchEnd,
+
+  isBackArrowEnabled,
+  onBackArrowClick,
+  isNextArrowEnabled,
+  onNextArrowClick,
+
+  onActiveImageTouchStart,
+  onActiveImageTouchMove,
+  onActiveImageTouchEnd,
 }) => {
   const activeImageContainerClassName = getClassName({
     [`product-slider__active-image-container`]: true,

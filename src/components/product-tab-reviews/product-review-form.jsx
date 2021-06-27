@@ -17,11 +17,22 @@ const RATING_CONSTRAINT = {
 };
 
 const ProductReviewForm = ({
-  product, localReview,
+  product,
+  localReview,
+
   hasBounceAnimation,
-  isRejected, authorError, commentError,
-  onFormSubmit, onCloseButtonClick, onContainerMouseDown,
-  authorInputRef, commentInputRef,
+  isRejected,
+
+  authorError,
+  commentError,
+
+  onFormSubmit,
+  onCloseButtonClick,
+  onContainerMouseDown,
+
+  authorInputRef,
+  commentInputRef,
+
   onAuthorInputChange,
   onRatingInputChange,
   onAdvantagesInputChange,

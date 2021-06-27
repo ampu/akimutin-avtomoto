@@ -160,11 +160,20 @@ export const withReviewFormState = (Component) => {
     return (
       <Component
         localReview={localReview}
-        hasBounceAnimation={hasBounceAnimation} isRejected={isRejected}
-        authorError={authorError} commentError={commentError}
+
+        hasBounceAnimation={hasBounceAnimation}
+        isRejected={isRejected}
+
+        authorError={authorError}
+        commentError={commentError}
+
         onFormSubmit={onFormSubmit}
-        onCloseButtonClick={onClose} onContainerMouseDown={onContainerMouseDown}
-        authorInputRef={authorInputRef} commentInputRef={commentInputRef}
+        onCloseButtonClick={onClose}
+        onContainerMouseDown={onContainerMouseDown}
+
+        authorInputRef={authorInputRef}
+        commentInputRef={commentInputRef}
+
         onAuthorInputChange={onAuthorInputChange}
         onRatingInputChange={onRatingInputChange}
         onAdvantagesInputChange={onAdvantagesInputChange}

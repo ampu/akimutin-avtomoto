@@ -64,10 +64,12 @@ export const withActiveImage = (Component) => {
       <Component
         product={product}
         activeImageIndex={activeImageIndex}
+
         isBackArrowEnabled={activeImageIndex !== 0}
         onBackArrowClick={onBackArrowClick}
         isNextArrowEnabled={activeImageIndex !== lastImageIndex}
         onNextArrowClick={onNextArrowClick}
+
         onActiveImageTouchStart={onActiveImageTouchStart}
         onActiveImageTouchMove={onActiveImageTouchMove}
         onActiveImageTouchEnd={onActiveImageTouchEnd}
