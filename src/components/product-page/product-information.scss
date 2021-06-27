@@ -92,7 +92,7 @@
   margin-left: 3px;
 }
 
-.product-information__prices strong {
+.product-information__prices b {
   display: flex;
   margin-right: 35px;
 
@@ -103,7 +103,7 @@
   white-space: pre;
 }
 
-.product-information__prices delete {
+.product-information__prices del {
   position: relative;
   display: flex;
 
@@ -112,6 +112,7 @@
   font-size: 20px;
   line-height: 27px;
   white-space: pre;
+  text-decoration: none;
 
   opacity: 0.5;
 
