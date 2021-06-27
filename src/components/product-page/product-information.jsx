@@ -25,7 +25,7 @@ const ProductInformation = ({product}) => {
 
       <p className="product-information__prices">
         <strong>{formatMoney(product.price)}&nbsp;₽</strong>
-        <span>{addSpecialMillionSeparator(formatMoney(product.oldPrice))}&nbsp;₽</span>
+        <delete>{addSpecialMillionSeparator(formatMoney(product.oldPrice))}&nbsp;₽</delete>
       </p>
 
       <Link className="product-information__buy-car-button" to={LocalPath.BUY_CAR}>

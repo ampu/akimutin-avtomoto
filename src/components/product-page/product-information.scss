@@ -94,7 +94,7 @@
 
 .product-information__prices strong {
   display: flex;
-  margin-right: 36px;
+  margin-right: 35px;
 
   font-style: normal;
   font-weight: 700;
@@ -103,7 +103,7 @@
   white-space: pre;
 }
 
-.product-information__prices span {
+.product-information__prices delete {
   position: relative;
   display: flex;
 
@@ -115,17 +115,18 @@
 
   opacity: 0.5;
 
-  &::before {
+  &::after {
     content: "";
-    display: table;
     position: absolute;
     z-index: 1;
-    left: -3px;
-    top: -2px;
-    width: calc(100% + 12px);
-    height: (27px + 2px);
+    left: -2px;
+    top: 50%;
+    width: calc(100% + 10px);
+    height: 100%;
 
-    background: transparent url("../../images/price-strikethrough.svg") center center / 100% 100%;
+    border-top: 1px solid $primary-text-color;
+
+    transform: rotate(-5deg);
   }
 }
 
