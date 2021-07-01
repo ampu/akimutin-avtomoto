@@ -95,38 +95,6 @@ const ProductReviewForm = ({
             />
           </label>
 
-          <div className="product-review-form__rating">
-            <fieldset>
-              <legend>Оцените товар:</legend>
-
-              {range(RATING_CONSTRAINT.min, RATING_CONSTRAINT.max + 1).map((value) => {
-                const ratingId = `product-review-form-rating-${value}`;
-
-                return (
-                  <Fragment key={ratingId}>
-                    <input
-                      type="radio"
-                      id={ratingId}
-                      className="visually-hidden"
-                      name="rating"
-                      value={value}
-                      checked={localReview.rating === value}
-                      onChange={onRatingInputChange}
-                    />
-                    <label htmlFor={ratingId}>
-                      <svg width="27" height="28" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M8.74375 0L10.6227 5.87336L16.7029 5.87336L11.7839 9.50329L13.6628 15.3766L8.74375 11.7467L3.82472 15.3766L5.70362 9.50329L0.784596 5.87336L6.86485 5.87336L8.74375 0Z"
-                          fill="#d12136"/>
-                      </svg>
-                      <span className="visually-hidden">{value} {formatStars(value)}</span>
-                    </label>
-                  </Fragment>
-                );
-              })}
-            </fieldset>
-          </div>
-
           <label className="product-review-form__advantages">
             <input
               type="text"
@@ -161,6 +129,39 @@ const ProductReviewForm = ({
             />
           </label>
 
+          <div className="product-review-form__rating">
+            <fieldset>
+              <legend>Оцените товар:</legend>
+
+              {range(RATING_CONSTRAINT.min, RATING_CONSTRAINT.max + 1).map((value) => {
+                const ratingId = `product-review-form-rating-${value}`;
+
+                return (
+                  <Fragment key={ratingId}>
+                    <input
+                      type="radio"
+                      id={ratingId}
+                      className="visually-hidden"
+                      name="rating"
+                      value={value}
+                      checked={localReview.rating === value}
+                      onChange={onRatingInputChange}
+                    />
+                    <label htmlFor={ratingId}>
+                      <svg width="27" height="28" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8.74375 0L10.6227 5.87336L16.7029 5.87336L11.7839 9.50329L13.6628 15.3766L8.74375 11.7467L3.82472 15.3766L5.70362 9.50329L0.784596 5.87336L6.86485 5.87336L8.74375 0Z"
+                          fill="#d12136"
+                        />
+                      </svg>
+                      <span className="visually-hidden">{value} {formatStars(value)}</span>
+                    </label>
+                  </Fragment>
+                );
+              })}
+            </fieldset>
+          </div>
+
           <button type="submit">Оставить отзыв</button>
         </form>
       </section>
@@ -171,19 +172,24 @@ const ProductReviewForm = ({
 ProductReviewForm.propTypes = {
   product: productShape.isRequired,
   localReview: localReviewShape.isRequired,
+
   hasBounceAnimation: PropTypes.bool.isRequired,
   isRejected: PropTypes.bool.isRequired,
+
   authorError: PropTypes.string.isRequired,
   commentError: PropTypes.string.isRequired,
+
   onFormSubmit: PropTypes.func.isRequired,
   onCloseButtonClick: PropTypes.func.isRequired,
   onContainerMouseDown: PropTypes.func.isRequired,
+
   authorInputRef: PropTypes.shape({
     current: PropTypes.instanceOf(HTMLInputElement),
   }).isRequired,
   commentInputRef: PropTypes.shape({
     current: PropTypes.instanceOf(HTMLTextAreaElement),
   }).isRequired,
+
   onAuthorInputChange: PropTypes.func.isRequired,
   onRatingInputChange: PropTypes.func.isRequired,
   onAdvantagesInputChange: PropTypes.func.isRequired,

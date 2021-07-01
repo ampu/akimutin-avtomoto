@@ -1,13 +1,16 @@
 /**
  * @param {number} timeout
- * @return {{schedule: Function}}
+ * @return {{schedule: Function, runImmediately: Function}}
  */
 const createThrottlingHelper = (timeout) => {
   const state = {
     callback: null,
+    timeoutId: null,
   };
 
   const invokeCallback = () => {
+    state.timeoutId = null;
+
     const callback = state.callback;
     state.callback = null;
 
@@ -16,13 +19,21 @@ const createThrottlingHelper = (timeout) => {
 
   return {
     schedule(callback) {
-      const scheduled = !!state.callback;
       state.callback = callback;
 
-      if (!scheduled) {
-        setTimeout(invokeCallback, timeout);
+      if (!state.timeoutId) {
+        state.timeoutId = setTimeout(invokeCallback, timeout);
       }
     },
+    runImmediately(callback) {
+      state.callback = callback;
+
+      if (state.timeoutId) {
+        clearTimeout(state.timeoutId);
+      }
+
+      invokeCallback();
+    }
   };
 };
 

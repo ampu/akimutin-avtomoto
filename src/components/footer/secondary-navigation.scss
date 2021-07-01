@@ -2,14 +2,16 @@
   list-style: none;
   margin: 0;
   margin-left: -25px;
+  margin-bottom: -10px;
   padding: 0;
-  display: flex;
-  flex-flow: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, auto);
   justify-content: space-between;
 }
 
 .secondary-navigation li {
   margin-left: 25px;
+  margin-bottom: 10px;
 }
 
 .secondary-navigation a {

@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {NavLink, Switch, generatePath, Route} from 'react-router-dom';
+import {NavLink, Route, generatePath} from 'react-router-dom';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
@@ -8,44 +7,62 @@ import {productShape} from '../../types/product-types';
 import {ProductTabSpecifications} from '../product-tab-specifications/product-tab-specifications';
 import {ProductTabContacts} from '../product-tab-contacts/product-tab-contacts';
 import {ProductTabReviewsWithReviewForm as ProductTabReviews} from '../product-tab-reviews/product-tab-reviews';
-import {withActiveTab} from '../../hocs/with-active-tab';
 
-const ProductTabs = ({product, tabs}) => {
+const TABS = [
+  {
+    path: LocalPath.PRODUCT_SPECIFICATIONS,
+    title: `Характеристики`,
+    component: ProductTabSpecifications,
+    onCreateProps: (product) => ({
+      specifications: product.specifications,
+    }),
+  },
+  {
+    path: LocalPath.PRODUCT_REVIEWS,
+    title: `Отзывы`,
+    component: ProductTabReviews,
+    onCreateProps: (product) => ({
+      product,
+    }),
+  },
+  {
+    path: LocalPath.PRODUCT_CONTACTS,
+    title: `Контакты`,
+    component: ProductTabContacts,
+    onCreateProps: () => ({}),
+  },
+];
+
+const ProductTabs = ({product}) => {
+  const onLinkFocus = (evt) => {
+    evt.target.click();
+  };
+
   return (
-    <div className="product-tabs">
-      <ul className="product-tabs__controls">
-        {tabs.map((tab) => (
-          <li key={tab.key}>
-            <NavLink exact to={generatePath(tab.path, product)}>
-              {tab.title}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-      <Switch>
-        <Route exact path={generatePath(LocalPath.PRODUCT_SPECIFICATIONS, product)}>
-          <ProductTabSpecifications specifications={product.specifications}/>
-        </Route>
-        <Route exact path={generatePath(LocalPath.PRODUCT_REVIEWS, product)}>
-          <ProductTabReviews product={product}/>
-        </Route>
-        <Route exact path={generatePath(LocalPath.PRODUCT_CONTACTS, product)}>
-          <ProductTabContacts/>
-        </Route>
-      </Switch>
-    </div>
+    <ul className="product-tabs">
+      {TABS.map((tab) => (
+        <li key={tab.path} className="product-tabs__tab-item">
+          <NavLink
+            className="product-tabs__tab-link"
+            exact to={generatePath(tab.path, product)}
+            onFocus={onLinkFocus}
+          >
+            {tab.title}
+          </NavLink>
+          <Route exact path={tab.path}>
+            <tab.component
+              className="product-tabs__tab-content"
+              {...tab.onCreateProps(product)}
+            />
+          </Route>
+        </li>
+      ))}
+    </ul>
   );
 };
 
 ProductTabs.propTypes = {
   product: productShape.isRequired,
-  tabs: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
 };
 
-const ProductTabsWithActiveTab = withActiveTab(ProductTabs);
-
-export {ProductTabs, ProductTabsWithActiveTab};
+export {ProductTabs};

@@ -154,6 +154,8 @@ export const withReviewFormState = (Component) => {
         }
 
         onSubmit(localReview);
+
+        localReviewStorage.setItemImmediately(DEFAULT_LOCAL_REVIEW);
       });
     };
 

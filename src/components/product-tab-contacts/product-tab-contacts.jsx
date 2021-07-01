@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import getClassName from 'classnames';
 
 import {OfficeMap} from './office-map';
 
-const ProductTabContacts = () => {
+const ProductTabContacts = ({className}) => {
   return (
-    <section className="product-tab-contacts">
+    <section className={getClassName(`product-tab-contacts`, className)}>
       <h2 className="visually-hidden">Контакты</h2>
 
       <dl>
@@ -33,6 +35,10 @@ const ProductTabContacts = () => {
       <OfficeMap/>
     </section>
   );
+};
+
+ProductTabContacts.propTypes = {
+  className: PropTypes.string,
 };
 
 export {ProductTabContacts};

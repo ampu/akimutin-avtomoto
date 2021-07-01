@@ -1,10 +1,12 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
+import getClassName from 'classnames';
 
 import {productType} from '../../types/product-types';
 
-const ProductTabSpecifications = ({specifications}) => {
+const ProductTabSpecifications = ({className, specifications}) => {
   return (
-    <section className="product-tab-specifications">
+    <section className={getClassName(`product-tab-specifications`, className)}>
       <h2 className="visually-hidden">Характеристики</h2>
       <dl>
         {specifications.map((specification) => (
@@ -19,6 +21,7 @@ const ProductTabSpecifications = ({specifications}) => {
 };
 
 ProductTabSpecifications.propTypes = {
+  className: PropTypes.string,
   specifications: productType.specifications,
 };
 

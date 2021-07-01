@@ -28,6 +28,7 @@
 }
 
 .product-review-form h2 {
+  order: -1;
   grid-column: 1 / -1;
   padding: 0;
   margin: 0;
@@ -49,7 +50,7 @@
   right: 20px;
   top: 20px;
   box-sizing: content-box;
-  padding: 5px;
+  padding: 5px 5px 4px 5px;
   margin: 0;
   display: flex;
   width: 15px;
@@ -111,6 +112,7 @@
 }
 
 .product-review-form__author {
+  order: -1;
   margin-bottom: 16px;
 }
 
@@ -119,6 +121,7 @@
 }
 
 .product-review-form__rating {
+  order: -1;
   box-sizing: border-box;
   height: 100%;
   padding-bottom: 33px;
@@ -186,8 +189,8 @@
   fill: $interactive-alternate-color;
 }
 
-.product-review-form__rating input:focus-visible + label path {
-  fill: $interactive-hover-color;
+.product-review-form__rating input:focus + label path {
+  stroke: $outline-alternate-color;
 }
 
 .product-review-form__comment {

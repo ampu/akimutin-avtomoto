@@ -45,6 +45,12 @@ class LocalReviewStorage {
       this.setItem(localReview);
     });
   }
+
+  setItemImmediately(localReview) {
+    this._throllingHelper.runImmediately(() => {
+      this.setItem(localReview);
+    });
+  }
 }
 
 export const localReviewStorage = new LocalReviewStorage(localStorage, REVIEW_STORAGE_KEY);

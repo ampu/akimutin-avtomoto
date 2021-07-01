@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link, generatePath} from 'react-router-dom';
+import getClassName from 'classnames';
 
 import {LocalPath} from '../../constants/local-path';
 import {productShape} from '../../types/product-types';
@@ -11,6 +12,7 @@ import {ProductReviewFormWithState as ProductReviewForm} from './product-review-
 import {withReviewForm} from '../../hocs/with-review-form';
 
 const ProductTabReviews = ({
+  className,
   product,
   reviews,
   hasReviewForm,
@@ -21,7 +23,7 @@ const ProductTabReviews = ({
   const isEmpty = reviews.length === 0;
 
   return (
-    <section className="product-tab-reviews">
+    <section className={getClassName(`product-tab-reviews`, className)}>
       <h2 className="visually-hidden">Отзывы</h2>
 
       <Link
@@ -59,6 +61,7 @@ const ProductTabReviews = ({
 };
 
 ProductTabReviews.propTypes = {
+  className: PropTypes.string,
   product: productShape.isRequired,
   reviews: reviewsType,
   hasReviewForm: PropTypes.bool.isRequired,
